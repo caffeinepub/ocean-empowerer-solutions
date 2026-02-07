@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Website/dashboard UI enhancement requested: make site more elaborate and adjust top navigation (Home/About/Service/Contact) positioning and styling.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-update-the-desktop-header-navigation-so-the-home-about-services-contact-menu-is-positioned-on-the-top-right-side-of-the-header-to-the-right-of-the-logo-and-appears-slightly-larger-than-it-is-now",
+      "title": "Update the desktop header navigation so the Home/About/Services/Contact menu is positioned on the top-right side of the header (to the right of the logo) and appears slightly larger than it is now.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-home-about-services-contact-navigation-to-a-clear-link-mode-presentation-links-should-look-and-behave-like-navigation-links-not-button-like-including-hover-styling-and-an-active-selected-state-that-reflects-the-currently-viewed-section-while-scrolling",
+      "title": "Change the Home/About/Services/Contact navigation to a clear \"link mode\" presentation: links should look and behave like navigation links (not button-like), including hover styling and an active/selected state that reflects the currently viewed section while scrolling.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-overall-website-more-elaborate-while-keeping-the-same-single-page-structure-and-the-same-top-level-sections-home-about-services-contact-by-enhancing-visual-hierarchy-spacing-and-section-presentation-e-g-improved-hero-composition-section-separators-background-treatments-and-more-polished-card-typography-rhythm",
+      "title": "Make the overall website more elaborate while keeping the same single-page structure and the same top-level sections (Home, About, Services, Contact), by enhancing visual hierarchy, spacing, and section presentation (e.g., improved hero composition, section separators/background treatments, and more polished card/typography rhythm).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-one-cohesive-visual-theme-across-the-site-colors-typography-layout-accents-and-enforce-it-consistently-across-header-sections-and-footer",
+      "title": "Apply one cohesive visual theme across the site (colors, typography, layout accents) and enforce it consistently across header, sections, and footer.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Enhance website layout: create a more elaborate site and move Home/About/Service/Contact navigation to the top-right of the dashboard/header, slightly larger, styled as links (link mode).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Enhance website layout and adjust top-right navigation link styling",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
