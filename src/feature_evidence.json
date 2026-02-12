@@ -2,14 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-apply-a-cohesive-professional-visual-theme-across-the-site-colors-typography-spacing-shadows-borders-while-keeping-all-existing-sections-and-content-structure-intact-the-theme-should-feel-modern-and-corporate-with-restrained-use-of-accent-colors-and-improved-contrast-readability",
-      "featureTitle": "Apply a cohesive, professional visual theme across the site (colors, typography, spacing, shadows, borders) while keeping all existing sections and content structure intact. The theme should feel modern and corporate, with restrained use of accent colors and improved contrast/readability.",
-      "files": [
-        "frontend/index.css",
-        "frontend/src/App.tsx",
-        "frontend/src/components/sections/ProjectsSection.tsx",
-        "frontend/src/components/sections/TestimonialsSection.tsx"
-      ],
+      "featureId": "feature-create-a-new-typographic-logo-design-for-ocean-empowerer-solutions-that-uses-a-bold-unique-font-style-and-a-color-treatment-that-feels-young-forward-thinking-and-growth-oriented-while-remaining-highly-legible-at-small-sizes",
+      "featureTitle": "Create a new typographic logo design for “Ocean Empowerer Solutions” that uses a bold, unique font style and a color treatment that feels young, forward-thinking, and growth-oriented, while remaining highly legible at small sizes.",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -23,17 +18,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-global-theme-tokens-and-base-styles-to-match-the-new-professional-theme-by-refining-css-variables-and-shared-utility-classes-e-g-in-the-global-stylesheet-and-tailwind-theme-without-changing-the-app-s-routing-or-adding-new-features",
-      "featureTitle": "Update global theme tokens and base styles to match the new professional theme by refining CSS variables and shared utility classes (e.g., in the global stylesheet and Tailwind theme), without changing the app’s routing or adding new features.",
+      "featureId": "feature-update-the-frontend-to-use-the-new-logo-assets-everywhere-the-brand-logo-appears-by-updating-frontend-src-lib-brandassets-ts-and-any-remaining-hardcoded-logo-references-e-g-social-meta-tags-in-frontend-index-html-to-point-to-the-new-generated-filenames",
+      "featureTitle": "Update the frontend to use the new logo assets everywhere the brand logo appears by updating frontend/src/lib/brandAssets.ts and any remaining hardcoded logo references (e.g., social meta tags in frontend/index.html) to point to the new generated filenames.",
       "files": [
-        "frontend/index.css",
-        "frontend/src/components/SectionHeader.tsx",
-        "frontend/src/components/sections/AboutSection.tsx",
-        "frontend/src/components/sections/ContactSection.tsx",
-        "frontend/src/components/sections/ServicesSection.tsx",
-        "frontend/src/components/sections/TestimonialsSection.tsx",
-        "frontend/src/components/sections/WhyChooseUsSection.tsx",
-        "frontend/tailwind.config.js"
+        "frontend/index.html",
+        "frontend/src/lib/brandAssets.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -48,19 +37,11 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-polish-key-ui-components-for-a-more-premium-professional-presentation-header-navigation-primary-secondary-outline-buttons-cards-used-in-services-projects-why-choose-us-about-leadership-and-contact-information-panels-ensure-consistent-hover-focus-states-and-visual-rhythm",
-      "featureTitle": "Polish key UI components for a more premium, professional presentation: header/navigation, primary/secondary/outline buttons, cards used in Services/Projects/Why Choose Us/About/Leadership, and Contact information panels; ensure consistent hover/focus states and visual rhythm.",
+      "featureId": "feature-ensure-the-newly-generated-logo-image-files-are-included-as-static-assets-under-frontend-public-assets-generated-and-that-the-app-builds-and-renders-without-broken-image-links",
+      "featureTitle": "Ensure the newly generated logo image files are included as static assets under frontend/public/assets/generated and that the app builds and renders without broken image links.",
       "files": [
-        "frontend/src/components/ContactForm.tsx",
-        "frontend/src/components/MobileNav.tsx",
-        "frontend/src/components/SiteFooter.tsx",
-        "frontend/src/components/SiteHeader.tsx",
-        "frontend/src/components/sections/AboutSection.tsx",
-        "frontend/src/components/sections/ContactSection.tsx",
-        "frontend/src/components/sections/HomeSection.tsx",
-        "frontend/src/components/sections/ProjectsSection.tsx",
-        "frontend/src/components/sections/ServicesSection.tsx",
-        "frontend/src/components/sections/WhyChooseUsSection.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/BrandAssetPreloader.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",

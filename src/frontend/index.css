@@ -4,58 +4,58 @@
 
 @layer base {
     :root {
-        --radius: 0.75rem;
-        /* Professional Corporate Palette - Neutral with Refined Accents */
-        --background: 0.99 0.002 240;
-        --foreground: 0.15 0.01 240;
+        --radius: 0.5rem;
+        /* Light Blue Professional Corporate Palette - Airy & Trustworthy */
+        --background: 0.99 0 0;
+        --foreground: 0.25 0.015 235;
         --card: 1 0 0;
-        --card-foreground: 0.15 0.01 240;
+        --card-foreground: 0.25 0.015 235;
         --popover: 1 0 0;
-        --popover-foreground: 0.15 0.01 240;
-        /* Deep Navy Primary - Professional & Trustworthy */
-        --primary: 0.35 0.08 250;
+        --popover-foreground: 0.25 0.015 235;
+        /* Light Blue Primary - Professional Trust & Clarity */
+        --primary: 0.65 0.14 230;
         --primary-foreground: 0.99 0 0;
-        /* Warm Slate Secondary - Sophisticated */
-        --secondary: 0.70 0.02 240;
-        --secondary-foreground: 0.15 0.01 240;
-        --muted: 0.96 0.005 240;
-        --muted-foreground: 0.45 0.01 240;
-        /* Refined Teal Accent - Modern Touch */
-        --accent: 0.55 0.10 200;
+        /* Soft Blue-Gray Secondary - Sophisticated Neutrality */
+        --secondary: 0.85 0.015 235;
+        --secondary-foreground: 0.25 0.015 235;
+        --muted: 0.96 0.008 235;
+        --muted-foreground: 0.55 0.025 235;
+        /* Vibrant Light Blue Accent - Professional Energy */
+        --accent: 0.70 0.16 235;
         --accent-foreground: 0.99 0 0;
         --destructive: 0.577 0.245 27.325;
         --destructive-foreground: 0.985 0 0;
-        --border: 0.90 0.005 240;
-        --input: 0.90 0.005 240;
-        --ring: 0.35 0.08 250;
-        --chart-1: 0.35 0.08 250;
-        --chart-2: 0.55 0.10 200;
-        --chart-3: 0.50 0.08 220;
-        --chart-4: 0.60 0.06 210;
-        --chart-5: 0.40 0.09 260;
+        --border: 0.92 0.008 235;
+        --input: 0.92 0.008 235;
+        --ring: 0.65 0.14 230;
+        --chart-1: 0.65 0.14 230;
+        --chart-2: 0.70 0.16 235;
+        --chart-3: 0.75 0.12 240;
+        --chart-4: 0.60 0.10 225;
+        --chart-5: 0.55 0.14 232;
     }
 
     .dark {
-        --background: 0.12 0.01 240;
-        --foreground: 0.96 0.005 240;
-        --card: 0.15 0.01 240;
-        --card-foreground: 0.96 0.005 240;
-        --popover: 0.15 0.01 240;
-        --popover-foreground: 0.96 0.005 240;
-        /* Lighter Navy for Dark Mode */
-        --primary: 0.60 0.10 240;
-        --primary-foreground: 0.12 0.01 240;
-        --secondary: 0.65 0.03 240;
-        --secondary-foreground: 0.96 0.005 240;
-        --muted: 0.20 0.01 240;
-        --muted-foreground: 0.65 0.01 240;
-        --accent: 0.65 0.12 200;
-        --accent-foreground: 0.12 0.01 240;
+        --background: 0.15 0.015 235;
+        --foreground: 0.96 0.005 235;
+        --card: 0.18 0.015 235;
+        --card-foreground: 0.96 0.005 235;
+        --popover: 0.18 0.015 235;
+        --popover-foreground: 0.96 0.005 235;
+        /* Lighter Blue for Dark Mode */
+        --primary: 0.75 0.16 235;
+        --primary-foreground: 0.15 0.015 235;
+        --secondary: 0.65 0.025 235;
+        --secondary-foreground: 0.96 0.005 235;
+        --muted: 0.22 0.015 235;
+        --muted-foreground: 0.70 0.02 235;
+        --accent: 0.80 0.18 235;
+        --accent-foreground: 0.15 0.015 235;
         --destructive: 0.704 0.191 22.216;
-        --destructive-foreground: 0.96 0.005 240;
-        --border: 0.25 0.01 240;
-        --input: 0.25 0.01 240;
-        --ring: 0.60 0.10 240;
+        --destructive-foreground: 0.96 0.005 235;
+        --border: 0.28 0.015 235;
+        --input: 0.28 0.015 235;
+        --ring: 0.75 0.16 235;
     }
 
     * {
@@ -65,6 +65,7 @@
     html {
         overflow-x: hidden;
         scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
     }
     
     body {
@@ -73,33 +74,34 @@
         overflow-x: hidden;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        line-height: 1.6;
+        line-height: 1.65;
     }
     
     h1, h2, h3, h4, h5, h6 {
-        @apply font-semibold tracking-tight;
+        @apply font-bold tracking-tight;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        line-height: 1.2;
+        line-height: 1.15;
     }
     
     h1 {
         @apply text-4xl md:text-5xl lg:text-6xl;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.025em;
     }
     
     h2 {
         @apply text-3xl md:text-4xl lg:text-5xl;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.02em;
     }
     
     h3 {
         @apply text-2xl md:text-3xl;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.015em;
     }
     
     h4 {
         @apply text-xl md:text-2xl;
+        letter-spacing: -0.01em;
     }
     
     p {
@@ -116,18 +118,23 @@
     *:focus-visible {
         @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
     }
+    
+    /* Smooth anchor navigation with offset for sticky header */
+    section[id] {
+        scroll-margin-top: 5rem;
+    }
 }
 
 @layer components {
-    /* Navigation Link Styles - Professional and refined */
+    /* Navigation Link Styles - Enterprise-grade precision */
     .nav-link {
-        @apply relative inline-block font-medium;
-        transition: color 0.2s ease;
+        @apply relative inline-block font-semibold;
+        transition: color 0.25s ease;
     }
     
     .nav-link::after {
         content: '';
-        @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out;
+        @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 ease-out;
     }
     
     .nav-link:hover::after,
@@ -135,19 +142,19 @@
         @apply w-full;
     }
     
-    /* Section Spacing - Generous and breathable */
+    /* Section Spacing - Premium rhythm */
     .section-spacing {
-        @apply py-20 md:py-28 lg:py-36;
+        @apply py-24 md:py-32 lg:py-40;
     }
     
-    /* Professional Card Styling */
+    /* Professional Card Styling - Consistent system */
     .card-professional {
-        @apply bg-card border border-border rounded-xl shadow-xs hover:shadow-soft transition-all duration-300;
+        @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
     }
     
-    /* Icon Container - Consistent styling */
+    /* Icon Container - Refined treatment */
     .icon-container {
-        @apply flex items-center justify-center rounded-xl transition-colors duration-300;
+        @apply flex items-center justify-center rounded-lg transition-colors duration-300;
     }
     
     /* Button Focus States */

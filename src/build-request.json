@@ -1,77 +1,88 @@
 {
   "kind": "build_request",
-  "title": "Professional theme upgrade (more polished visual design)",
+  "title": "Refresh brand logo to a bold, youthful, forward-thinking typographic style",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Apply a cohesive, professional visual theme across the site (colors, typography, spacing, shadows, borders) while keeping all existing sections and content structure intact. The theme should feel modern and corporate, with restrained use of accent colors and improved contrast/readability.",
-      "target": "frontend",
+      "text": "Create a new typographic logo design for “Ocean Empowerer Solutions” that uses a bold, unique font style and a color treatment that feels young, forward-thinking, and growth-oriented, while remaining highly legible at small sizes.",
+      "target": "unknown",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-1"
         ],
         "quotes": [
-          "we want professional Version Theme updarde"
+          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
         ]
       },
       "acceptanceCriteria": [
-        "The overall look and feel is consistently professional across header, all sections, and footer (no section appears to use a different style system).",
-        "Typography is consistent (heading hierarchy, body sizes, line-heights) and readability is improved compared to current theme.",
-        "Color usage is restrained and consistent (primary/secondary/accent are used intentionally; muted/foreground contrast meets accessibility expectations).",
-        "No content sections are removed or hidden as part of the theme upgrade."
+        "New logo design direction is clearly typographic (font-led) and reads as bold/unique",
+        "Color treatment communicates a youthful and forward-thinking brand impression",
+        "Logo remains readable at header size (approx. 36–40px tall) and icon size (256x256)"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update global theme tokens and base styles to match the new professional theme by refining CSS variables and shared utility classes (e.g., in the global stylesheet and Tailwind theme), without changing the app’s routing or adding new features.",
+      "text": "Update the frontend to use the new logo assets everywhere the brand logo appears by updating frontend/src/lib/brandAssets.ts and any remaining hardcoded logo references (e.g., social meta tags in frontend/index.html) to point to the new generated filenames.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-1"
         ],
         "quotes": [
-          "we want professional Version Theme updarde"
+          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
         ]
       },
       "acceptanceCriteria": [
-        "Global design tokens (background/foreground, primary/secondary/accent, border/ring, radii, shadows) are updated to reflect the new theme.",
-        "Common shared classes (e.g., navigation link styling, section spacing, section headings) reflect the new theme and reduce one-off styling drift.",
-        "The site renders correctly in both light and dark mode if dark mode is currently supported by tokens (no unreadable text on either mode)."
+        "frontend/src/lib/brandAssets.ts points to the new horizontal, icon, and social logo asset paths under /assets/generated/",
+        "The header and footer logo render the new horizontal logo via BRAND_ASSETS.logoHorizontal",
+        "OpenGraph/Twitter social image in frontend/index.html uses the new social logo asset filename (not the old one)",
+        "SEO structured data continues to use BRAND_ASSETS.logoSocial (no regression)"
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Polish key UI components for a more premium, professional presentation: header/navigation, primary/secondary/outline buttons, cards used in Services/Projects/Why Choose Us/About/Leadership, and Contact information panels; ensure consistent hover/focus states and visual rhythm.",
+      "text": "Ensure the newly generated logo image files are included as static assets under frontend/public/assets/generated and that the app builds and renders without broken image links.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-1"
         ],
         "quotes": [
-          "we want professional Version Theme updarde"
+          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
         ]
       },
       "acceptanceCriteria": [
-        "Header and navigation look more polished (spacing, alignment, hover/active states) and remain fully functional on desktop and mobile.",
-        "Buttons have consistent sizing, typography, hover, and focus styles across the app.",
-        "Cards and panels have consistent borders/radii/shadows and consistent internal spacing across all sections.",
-        "No regressions in responsiveness: layout remains clean on mobile, tablet, and desktop breakpoints."
+        "All new logo files exist in frontend/public/assets/generated with the expected filenames",
+        "No missing-image placeholders or 404s occur for logo assets in header, footer, or social meta image"
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui (shadcn UI sources); compose and style via props/classes instead.",
-    "Do not edit immutable frontend hook files listed in SYSTEM_CONTEXT (e.g., useInternetIdentity/useActor/main.tsx).",
-    "Backend (Motoko) behavior and data structures must remain unchanged; this request is theme-only unless theme changes require no data migration."
+    "Do not edit files under frontend/src/components/ui (read-only components).",
+    "Do not edit immutable hook files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Keep backend as a single Motoko actor; no backend changes are required for this logo update."
   ],
   "nonGoals": [
-    "Adding new sections or new business features beyond visual/theme changes.",
-    "Changing company copy/content strategy (other than minor typographic presentation improvements).",
-    "Implementing new authentication methods or third-party integrations."
+    "Do not redesign the full site layout or section content beyond updating logo asset references.",
+    "Do not change authentication or contact form/backend message storage behavior."
   ],
   "imageRequirements": {
     "required": [],
-    "edits": []
+    "edits": [
+      "Update to a bold, unique, youthful, forward-thinking typographic logo style with a growth-oriented color treatment (premium-logo-horizontal-lightblue.dim_512x128.png > bold-youthful-logo-horizontal.dim_512x128.png)",
+      "Update to a matching bold, unique icon-style logo mark suitable for small sizes (premium-logo-icon-lightblue.dim_256x256.png > bold-youthful-logo-icon.dim_256x256.png)",
+      "Update to a matching bold, unique wide logo lockup suitable for social sharing previews (ocean-empowerer-solutions-logo-lightblue.dim_512x256.png > bold-youthful-logo-social.dim_512x256.png)"
+    ]
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

@@ -24,10 +24,10 @@ export function WhyChooseUsSection() {
             return (
               <div 
                 key={index}
-                className="text-center space-y-4 p-6 rounded-xl bg-card border border-border shadow-xs hover:shadow-soft hover:border-primary/30 transition-all duration-300"
+                className="text-center space-y-4 p-8 rounded-lg bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all duration-300"
               >
-                <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 mx-auto">
-                  <Icon className="w-7 h-7 text-primary" />
+                <div className="flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10 mx-auto">
+                  <Icon className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-lg font-bold text-foreground">
                   {item.title}

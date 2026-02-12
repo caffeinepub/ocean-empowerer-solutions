@@ -1,15 +1,19 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { siteContent } from '../../content/siteContent';
-import { CheckCircle2 } from 'lucide-react';
+import { Waves, Fish, Ship, Droplets } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 
 export function ProjectsSection() {
+  const getProjectIcon = (index: number) => {
+    const icons = [Waves, Fish, Ship, Droplets];
+    return icons[index % icons.length];
+  };
+
   return (
-    <section id="projects" className="section-spacing bg-muted/20 relative overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="absolute inset-0 z-0 opacity-5">
+    <section id="projects" className="section-spacing relative overflow-hidden">
+      {/* Light Blue Subtle Texture Background */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]">
         <img 
-          src="/assets/generated/ocean-conservation-banner.dim_2400x1200.jpg"
+          src="/assets/generated/light-blue-section-texture-worldclass.dim_2400x1200.png"
           alt=""
           className="w-full h-full object-cover"
         />
@@ -21,30 +25,30 @@ export function ProjectsSection() {
           subtitle={siteContent.projects.subtitle}
         />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-          {siteContent.projects.items.map((project, index) => (
-            <Card 
-              key={index}
-              className="group hover:shadow-soft hover:border-accent/30 transition-all duration-300 border-border bg-card/98 backdrop-blur-sm shadow-xs"
-            >
-              <CardHeader className="space-y-4">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent/15 transition-colors">
-                  <CheckCircle2 className="h-7 w-7" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {siteContent.projects.items.map((project, index) => {
+            const Icon = getProjectIcon(index);
+            return (
+              <div 
+                key={index}
+                className="card-professional p-8 hover:border-accent/30 transition-all group"
+              >
+                <div className="icon-container w-16 h-16 mb-6 bg-accent/10 text-accent group-hover:bg-accent/15 transition-colors">
+                  <Icon className="h-8 w-8" />
                 </div>
-                <CardTitle className="text-xl">{project.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <CardDescription className="text-sm leading-relaxed">
+                <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">
                   {project.description}
-                </CardDescription>
-                <div className="pt-2 border-t border-border">
-                  <div className="text-sm font-semibold text-accent">
-                    {project.impact}
+                </p>
+                <div className="space-y-3">
+                  <div>
+                    <span className="text-sm font-semibold text-accent">Impact:</span>
+                    <p className="text-sm text-muted-foreground mt-1">{project.impact}</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

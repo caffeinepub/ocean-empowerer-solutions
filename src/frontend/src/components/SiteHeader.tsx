@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { MobileNav } from './MobileNav';
@@ -9,13 +9,14 @@ import { BRAND_ASSETS } from '../lib/brandAssets';
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeSection = useActiveSection();
+  const headerRef = useRef<HTMLElement>(null);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
+    if (element && headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
       
       window.scrollTo({
         top: offsetPosition,
@@ -34,15 +35,18 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/90 shadow-xs">
-      <div className="container flex h-16 md:h-20 items-center justify-between gap-4">
+    <header 
+      ref={headerRef}
+      className="sticky top-0 z-50 w-full border-b border-border bg-background/98 backdrop-blur-sm supports-[backdrop-filter]:bg-background/95"
+    >
+      <div className="container flex h-20 items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <img 
             src={BRAND_ASSETS.logoHorizontal}
             alt="Ocean Empowerer Solutions" 
-            className="h-8 md:h-10 w-auto flex-shrink-0 max-w-[180px] sm:max-w-[220px] md:max-w-[260px]"
+            className="h-9 md:h-10 w-auto flex-shrink-0 max-w-[180px] sm:max-w-[220px] md:max-w-[260px]"
           />
-          <span className="hidden sm:inline-block font-semibold text-base md:text-lg truncate text-foreground">
+          <span className="hidden sm:inline-block font-bold text-base md:text-lg truncate text-foreground">
             {siteContent.company.name}
           </span>
         </div>
@@ -59,8 +63,8 @@ export function SiteHeader() {
               href={`#${link.id}`}
               className={`nav-link text-sm lg:text-base transition-colors duration-200 whitespace-nowrap ${
                 activeSection === link.id
-                  ? 'text-primary'
-                  : 'text-foreground/80 hover:text-foreground'
+                  ? 'text-accent'
+                  : 'text-foreground hover:text-accent'
               }`}
               aria-current={activeSection === link.id ? 'page' : undefined}
             >

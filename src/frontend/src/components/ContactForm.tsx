@@ -81,18 +81,18 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 text-center space-y-5 bg-card rounded-xl border border-border shadow-xs">
+      <div className="flex flex-col items-center justify-center p-12 text-center space-y-6 bg-card rounded-lg border border-border shadow-sm">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
           <CheckCircle2 className="h-8 w-8 text-primary" />
         </div>
-        <h3 className="text-2xl font-semibold text-foreground">Message Received!</h3>
+        <h3 className="text-2xl font-bold text-foreground">Message Received!</h3>
         <p className="text-muted-foreground text-base max-w-sm leading-relaxed">
           {siteContent.contact.form.successMessage}
         </p>
         <Button
           variant="outline"
           onClick={() => setIsSubmitted(false)}
-          className="mt-4 shadow-xs hover:shadow-soft transition-all"
+          className="mt-4 shadow-xs hover:shadow-sm transition-all font-semibold"
           size="lg"
         >
           Send Another Message
@@ -102,9 +102,9 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-xl border border-border shadow-xs">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg border border-border shadow-sm">
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold text-foreground">Send us a Message</h3>
+        <h3 className="text-xl font-bold text-foreground">Send us a Message</h3>
       </div>
       
       {submitMessageMutation.isError && (
@@ -113,18 +113,18 @@ export function ContactForm() {
           <div className="flex-1 text-sm text-destructive">
             Failed to send message. Please try again or email us directly at{' '}
             {emailIsValid ? (
-              <a href={`mailto:${siteContent.contact.info.email}`} className="underline font-medium">
+              <a href={`mailto:${siteContent.contact.info.email}`} className="underline font-semibold">
                 {siteContent.contact.info.email}
               </a>
             ) : (
-              <span className="font-medium">{siteContent.contact.info.email}</span>
+              <span className="font-semibold">{siteContent.contact.info.email}</span>
             )}
           </div>
         </div>
       )}
       
       <div className="space-y-2">
-        <Label htmlFor="name" className="text-sm font-medium text-foreground">
+        <Label htmlFor="name" className="text-sm font-semibold text-foreground">
           Name
         </Label>
         <Input
@@ -137,12 +137,12 @@ export function ContactForm() {
           disabled={submitMessageMutation.isPending}
         />
         {errors.name && (
-          <p className="text-xs text-destructive">{errors.name}</p>
+          <p className="text-xs text-destructive font-semibold">{errors.name}</p>
         )}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-sm font-medium text-foreground">
+        <Label htmlFor="email" className="text-sm font-semibold text-foreground">
           Email
         </Label>
         <Input
@@ -155,12 +155,12 @@ export function ContactForm() {
           disabled={submitMessageMutation.isPending}
         />
         {errors.email && (
-          <p className="text-xs text-destructive">{errors.email}</p>
+          <p className="text-xs text-destructive font-semibold">{errors.email}</p>
         )}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message" className="text-sm font-medium text-foreground">
+        <Label htmlFor="message" className="text-sm font-semibold text-foreground">
           Message
         </Label>
         <Textarea
@@ -172,14 +172,14 @@ export function ContactForm() {
           disabled={submitMessageMutation.isPending}
         />
         {errors.message && (
-          <p className="text-xs text-destructive">{errors.message}</p>
+          <p className="text-xs text-destructive font-semibold">{errors.message}</p>
         )}
       </div>
 
       <Button 
         type="submit" 
         size="lg"
-        className="w-full group h-11 shadow-soft hover:shadow-medium transition-all"
+        className="w-full group h-11 shadow-sm hover:shadow-md transition-all font-semibold"
         disabled={submitMessageMutation.isPending}
       >
         {submitMessageMutation.isPending ? (

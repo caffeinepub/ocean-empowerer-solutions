@@ -14,7 +14,7 @@ export function SectionHeader({
   const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
   
   return (
-    <div className={`max-w-3xl space-y-4 mb-16 ${alignClass} ${className}`}>
+    <div className={`max-w-3xl space-y-5 mb-16 ${alignClass} ${className}`}>
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
         {title}
       </h2>

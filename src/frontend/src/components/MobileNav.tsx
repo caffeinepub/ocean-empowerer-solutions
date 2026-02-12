@@ -9,7 +9,7 @@ export function MobileNav({ isOpen, navLinks, onNavigate, activeSection }: Mobil
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden border-t border-border/60 bg-background/98 backdrop-blur-md shadow-soft">
+    <div className="md:hidden border-t border-border bg-background/98 backdrop-blur-sm">
       <nav className="container py-4 flex flex-col gap-1">
         {navLinks.map((link) => (
           <a
@@ -19,10 +19,10 @@ export function MobileNav({ isOpen, navLinks, onNavigate, activeSection }: Mobil
               onNavigate(link.id);
             }}
             href={`#${link.id}`}
-            className={`text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+            className={`text-left px-4 py-3 text-base font-semibold rounded-md transition-all duration-200 ${
               activeSection === link.id
-                ? 'text-primary bg-primary/10 shadow-xs'
-                : 'text-foreground/80 hover:text-foreground hover:bg-muted/80'
+                ? 'text-accent bg-accent/10'
+                : 'text-foreground hover:text-accent hover:bg-muted'
             }`}
             aria-current={activeSection === link.id ? 'page' : undefined}
           >

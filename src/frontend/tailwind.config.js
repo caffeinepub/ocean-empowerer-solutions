@@ -15,7 +15,7 @@ export default {
                 md: '2rem',
                 lg: '3rem',
                 xl: '4rem',
-                '2xl': '6rem',
+                '2xl': '5rem',
             },
             screens: {
                 '2xl': '1400px'
@@ -96,14 +96,15 @@ export default {
                 '2xl': 'calc(var(--radius) + 8px)',
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.04)',
-                soft: '0 2px 8px 0 rgba(0,0,0,0.08), 0 1px 3px 0 rgba(0,0,0,0.06)',
-                medium: '0 8px 20px -2px rgba(0,0,0,0.10), 0 4px 8px -2px rgba(0,0,0,0.06)',
-                large: '0 20px 40px -4px rgba(0,0,0,0.12), 0 8px 16px -4px rgba(0,0,0,0.08)',
+                xs: '0 1px 2px 0 rgba(0,0,0,0.03)',
+                sm: '0 2px 4px 0 rgba(0,0,0,0.05)',
+                md: '0 4px 12px -2px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04)',
+                lg: '0 12px 24px -4px rgba(0,0,0,0.10), 0 4px 8px -2px rgba(0,0,0,0.06)',
+                xl: '0 20px 40px -8px rgba(0,0,0,0.12), 0 8px 16px -4px rgba(0,0,0,0.08)',
             },
             letterSpacing: {
-                tighter: '-0.02em',
-                tight: '-0.015em',
+                tighter: '-0.025em',
+                tight: '-0.02em',
             },
             lineHeight: {
                 relaxed: '1.7',

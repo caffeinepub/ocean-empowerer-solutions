@@ -1,79 +1,66 @@
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { ContactForm } from '../ContactForm';
 import { siteContent } from '../../content/siteContent';
-import { isValidEmail } from '../../lib/isValidEmail';
-import { Mail, Phone, MapPin } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 
 export function ContactSection() {
-  const emailIsValid = isValidEmail(siteContent.contact.info.email);
-
   return (
-    <section id="contact" className="section-spacing">
+    <section id="contact" className="section-spacing bg-muted/30">
       <div className="container">
-        <div id="get-started">
-          <SectionHeader 
-            title={siteContent.contact.title}
-            subtitle={siteContent.contact.subtitle}
-          />
-        </div>
+        <SectionHeader 
+          title={siteContent.contact.title}
+          subtitle={siteContent.contact.subtitle}
+        />
 
-        <div className="grid gap-12 lg:grid-cols-2 max-w-6xl mx-auto">
-          {/* Contact Information */}
-          <div className="space-y-6">
-            <div className="bg-card rounded-xl border border-border p-8 space-y-6 shadow-xs">
-              <h3 className="text-xl font-semibold mb-6 text-foreground">Contact Information</h3>
-              <div className="space-y-5">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-medium text-sm mb-1 text-foreground">Address</div>
-                    <div className="text-sm text-muted-foreground break-words leading-relaxed">
-                      {siteContent.contact.info.address}
-                    </div>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Information with Professional Imagery */}
+          <div className="space-y-8">
+            <div className="card-professional p-8 space-y-6">
+              <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
+              
+              <div className="flex items-start gap-4">
+                <div className="icon-container w-12 h-12 bg-accent/10 text-accent flex-shrink-0">
+                  <Mail className="h-6 w-6" />
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
-                    <Phone className="h-6 w-6" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-medium text-sm mb-1 text-foreground">Phone</div>
-                    <div className="text-sm text-muted-foreground break-words">
-                      {siteContent.contact.info.phone}
-                    </div>
-                  </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Email</h4>
+                  <a 
+                    href={`mailto:${siteContent.contact.info.email}`}
+                    className="text-accent hover:underline transition-colors"
+                  >
+                    {siteContent.contact.info.email}
+                  </a>
                 </div>
+              </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
-                    <Mail className="h-6 w-6" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="font-medium text-sm mb-1 text-foreground">Email</div>
-                    {emailIsValid ? (
-                      <a 
-                        href={`mailto:${siteContent.contact.info.email}`}
-                        className="text-sm text-primary hover:text-primary/80 transition-colors duration-200 break-all font-medium"
-                      >
-                        {siteContent.contact.info.email}
-                      </a>
-                    ) : (
-                      <div className="text-sm text-muted-foreground break-all">
-                        {siteContent.contact.info.email}
-                      </div>
-                    )}
-                  </div>
+              <div className="flex items-start gap-4">
+                <div className="icon-container w-12 h-12 bg-accent/10 text-accent flex-shrink-0">
+                  <Phone className="h-6 w-6" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Phone</h4>
+                  <p className="text-muted-foreground">{siteContent.contact.info.phone}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="icon-container w-12 h-12 bg-accent/10 text-accent flex-shrink-0">
+                  <MapPin className="h-6 w-6" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Address</h4>
+                  <p className="text-muted-foreground">{siteContent.contact.info.address}</p>
                 </div>
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-accent/10 border border-accent/20 shadow-xs">
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {siteContent.contact.form.note}
-              </p>
+            {/* Professional Supporting Image */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg">
+              <img 
+                src="/assets/generated/light-blue-corporate-sustainability-1.dim_1600x900.jpg"
+                alt="Sustainable technology and innovation"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
 
