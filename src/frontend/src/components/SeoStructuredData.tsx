@@ -1,9 +1,10 @@
 import { siteContent } from '../content/siteContent';
 import { getSiteUrl } from '../lib/siteOrigin';
+import { BRAND_ASSETS } from '../lib/brandAssets';
 
 export function SeoStructuredData() {
   const siteUrl = getSiteUrl('/');
-  const logoUrl = getSiteUrl('/assets/generated/ocean-empowerer-solutions-logo.dim_512x256.png');
+  const logoUrl = getSiteUrl(BRAND_ASSETS.logoSocial);
 
   const structuredData = {
     "@context": "https://schema.org",

@@ -13,9 +13,9 @@ export default {
                 DEFAULT: '1rem',
                 sm: '1.5rem',
                 md: '2rem',
-                lg: '2rem',
-                xl: '2rem',
-                '2xl': '2rem',
+                lg: '3rem',
+                xl: '4rem',
+                '2xl': '5rem',
             },
             screens: {
                 '2xl': '1400px'
@@ -23,8 +23,8 @@ export default {
         },
         extend: {
             fontFamily: {
-                sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+                sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                display: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
             },
             colors: {
                 border: 'oklch(var(--border))',
@@ -72,13 +72,12 @@ export default {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
-                xl: 'calc(var(--radius) + 4px)',
-                '2xl': 'calc(var(--radius) + 8px)',
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-                soft: '0 2px 8px -2px rgba(0,0,0,0.08), 0 4px 12px -4px rgba(0,0,0,0.05)',
-                medium: '0 8px 24px -8px rgba(0,0,0,0.12), 0 12px 32px -12px rgba(0,0,0,0.08)',
+                xs: '0 1px 2px 0 rgba(0,0,0,0.03)',
+                soft: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px 0 rgba(0,0,0,0.03)',
+                medium: '0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04)',
+                large: '0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04)',
             },
             letterSpacing: {
                 tighter: '-0.02em',

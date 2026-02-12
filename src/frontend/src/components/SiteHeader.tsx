@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { MobileNav } from './MobileNav';
 import { siteContent } from '../content/siteContent';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { BRAND_ASSETS } from '../lib/brandAssets';
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,21 +33,21 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 sm:h-20 items-center justify-between gap-4">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="container flex h-16 md:h-20 items-center justify-between gap-4">
+        <div className="flex items-center gap-3 min-w-0">
           <img 
-            src="/assets/Gemini_Generated_Image_g6vnjig6vnjig6vn.png" 
+            src={BRAND_ASSETS.logoHorizontal}
             alt="OCEAN EMPOWERER SOLUTIONS" 
-            className="h-8 sm:h-10 w-auto flex-shrink-0"
+            className="h-8 md:h-10 w-auto flex-shrink-0 max-w-[180px] sm:max-w-[220px] md:max-w-[260px]"
           />
-          <span className="hidden sm:inline-block font-display text-base sm:text-xl font-semibold truncate">
+          <span className="hidden sm:inline-block font-semibold text-base md:text-lg truncate">
             {siteContent.company.name}
           </span>
         </div>
 
-        {/* Desktop Navigation - Right Aligned */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10 ml-auto">
+        {/* Desktop Navigation - Right Aligned, Larger */}
+        <nav className="hidden md:flex items-center gap-8 lg:gap-12 ml-auto">
           {navLinks.map((link) => (
             <a
               key={link.id}
@@ -55,19 +56,14 @@ export function SiteHeader() {
                 scrollToSection(link.id);
               }}
               href={`#${link.id}`}
-              className={`nav-link text-base lg:text-lg font-medium transition-all duration-200 whitespace-nowrap relative ${
+              className={`nav-link text-base lg:text-lg font-medium transition-colors duration-200 whitespace-nowrap ${
                 activeSection === link.id
                   ? 'text-primary'
-                  : 'text-foreground/70 hover:text-foreground'
+                  : 'text-foreground hover:text-primary'
               }`}
               aria-current={activeSection === link.id ? 'page' : undefined}
             >
               {link.label}
-              <span 
-                className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-200 ${
-                  activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}
-              />
             </a>
           ))}
         </nav>

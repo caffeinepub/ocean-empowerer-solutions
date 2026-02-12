@@ -1,128 +1,98 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Elaborate single-page theme with right-aligned link-style navigation and scroll-aware active states",
+  "title": "Empowerment-focused ocean logo refresh and site-wide asset swap",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Right-align the desktop header navigation to the top-right of the header and increase its visual size without overlap.",
-      "acceptanceCriteria": [
-        "On desktop widths (md and up), the navigation links render aligned to the right side of the header area.",
-        "Navigation link text is visibly larger than the current `text-sm` styling (e.g., `text-base` or equivalent), while remaining responsive and not wrapping unexpectedly.",
-        "No layout overlap occurs between the logo/company name and the navigation items at common viewport widths."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Adjust the header layout so the desktop nav sits to the right of the logo and is right-aligned (e.g., use flex growth/`ml-auto` patterns) and increase link typography from the current `text-sm` to a larger responsive size; ensure no overlap with logo/company name at md+ widths."
-        },
-        {
-          "path": "frontend/index.css",
-          "operation": "modify",
-          "description": "Add cohesive nav typography/spacing utility styles (e.g., a shared nav-link class for md+ sizing/letter-spacing) to support the larger desktop menu while keeping responsive behavior consistent across the site."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Convert desktop navigation to link-style presentation with hover and scroll-synced active state while preserving smooth scroll.",
-      "acceptanceCriteria": [
-        "Desktop nav items are styled as links (e.g., underline/indicator on hover and active) rather than button-like UI.",
-        "As the user scrolls through the single-page sections (`home`, `about`, `services`, `contact`), the corresponding nav item reflects an active state.",
-        "Clicking a nav link still smooth-scrolls to the correct section (existing behavior preserved)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useActiveSection.ts",
-          "operation": "create",
-          "description": "Create a hook that tracks the currently active section among `home`, `about`, `services`, and `contact` based on scroll position (e.g., via IntersectionObserver) and returns the active section id for nav highlighting."
-        },
-        {
-          "path": "frontend/src/components/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Replace button-like desktop nav items with true link-style elements (anchor semantics) that still smooth-scroll on click; use the active section from `useActiveSection` to render active/selected state (e.g., underline/indicator and `aria-current`)."
-        },
-        {
-          "path": "frontend/src/components/MobileNav.tsx",
-          "operation": "modify",
-          "description": "Align mobile menu items with the same link-mode styling direction (less button-like) and optionally reflect the active section for consistency with desktop behavior."
-        },
-        {
-          "path": "frontend/index.css",
-          "operation": "modify",
-          "description": "Implement consistent link-mode nav styles (hover + active indicator/underline) using the existing Tailwind/CSS-variable approach; avoid one-off per-section styles."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Increase visual richness across Home/About/Services/Contact while keeping the same single-page structure and section IDs.",
-      "acceptanceCriteria": [
-        "The Home, About, Services, and Contact sections remain present and reachable via the header navigation.",
-        "Each section shows a noticeable increase in visual richness (improved spacing, typography hierarchy, and/or decorative layout elements) without adding new top-level pages.",
-        "Mobile responsiveness is maintained (no horizontal overflow; content remains readable and properly spaced on small screens)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.css",
-          "operation": "modify",
-          "description": "Introduce reusable section/layout utility classes (e.g., section spacing, subtle separators, background treatments, typography rhythm) to make the page feel more elaborate without adding new routes or breaking responsiveness."
-        },
-        {
-          "path": "frontend/src/components/sections/HomeSection.tsx",
-          "operation": "modify",
-          "description": "Enhance hero composition and hierarchy (e.g., improved spacing rhythm, refined badge/heading/subtitle alignment, and decorative separator treatment) while keeping the `home` section id and existing smooth-scroll CTA behavior. Uses existing shadcn-ui Button component for CTAs; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/AboutSection.tsx",
-          "operation": "modify",
-          "description": "Polish About section presentation (typography hierarchy, spacing, and card-like treatments for stats/partners) while keeping the `about` id and current content source unchanged."
-        },
-        {
-          "path": "frontend/src/components/sections/ServicesSection.tsx",
-          "operation": "modify",
-          "description": "Elevate Services section with improved grid rhythm and more polished Card presentation while keeping the `services` id and content mapping intact. Uses existing shadcn-ui Card components; verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/sections/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Refine Contact section layout density and visual hierarchy (info block + form balance, improved spacing, subtle background/separator) while keeping the `contact` id and current contact form behavior intact."
-        },
-        {
-          "path": "frontend/src/components/ContactForm.tsx",
-          "operation": "modify",
-          "description": "Polish the form container/fields presentation for a more elaborate feel (spacing, headings/labels rhythm, success state styling) without adding third-party services or new pages. Uses existing shadcn-ui form primitives (Button/Input/Textarea/Label); verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
       "id": "REQ-4",
-      "summary": "Apply a cohesive visual theme (colors, typography, accents) consistently across header, sections, and footer.",
+      "summary": "Add updated ocean-themed empowerment logo assets (horizontal, icon, and social image) as static generated assets.",
       "acceptanceCriteria": [
-        "Header, section blocks, and footer share consistent styling decisions (typography scale, spacing, and accent usage).",
-        "Theme is implemented using existing Tailwind/CSS variable approach and does not introduce inconsistent one-off styles across sections."
+        "Updated logo visuals clearly incorporate an ocean identity (e.g., wave/sea forms) plus an unmistakable upward/leadership cue (e.g., rising crest, arrow, peak, lighthouse, etc.) without becoming overly complex.",
+        "Logo remains premium/clean and readable at small sizes (header height ~32–40px).",
+        "Color/contrast remains suitable on the site header/footer backgrounds (no loss of legibility)."
       ],
       "file_operations": [
         {
-          "path": "frontend/index.css",
-          "operation": "modify",
-          "description": "Strengthen the site-wide theme using the existing CSS variable + Tailwind approach (e.g., consistent accent usage, section background tokens, and typography rhythm utilities) and ensure styles are applied consistently (not as isolated one-offs)."
+          "path": "frontend/public/assets/generated/premium-logo-horizontal-empowerment.dim_512x128.png",
+          "operation": "create",
+          "description": "Add the newly generated empowerment-focused horizontal ocean brand logo asset (edited from the current premium horizontal logo) as a static file."
+        },
+        {
+          "path": "frontend/public/assets/generated/premium-logo-icon-empowerment.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the newly generated empowerment-focused square icon variant as a static file, ensuring strong legibility at small sizes."
+        },
+        {
+          "path": "frontend/public/assets/generated/ocean-empowerer-solutions-logo-empowerment.dim_512x256.png",
+          "operation": "create",
+          "description": "Add the newly generated wide social logo image (ocean identity + empowerment/leadership cue) as a static file for OG/Twitter sharing previews."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Swap header and footer logo image src to the newly generated empowerment horizontal logo asset, ensuring consistent lockup.",
+      "acceptanceCriteria": [
+        "Header logo renders correctly and does not overflow the existing max-width constraints.",
+        "Footer logo renders correctly and matches the header logo (same asset/lockup).",
+        "No broken image links in header/footer on hard refresh."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/brandAssets.ts",
+          "operation": "create",
+          "description": "Create a single source of truth for brand asset static paths (e.g., header/footer logo and social image) to keep usage consistent and avoid accidental backend fetching."
         },
         {
           "path": "frontend/src/components/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Align header styling with the updated cohesive theme (consistent background, border, nav link indicators, and spacing) while maintaining sticky behavior and responsiveness."
+          "description": "Update the header logo image src to use the new static empowerment horizontal logo asset (via the shared brand assets module). Preserve existing sizing/max-width behavior."
         },
         {
           "path": "frontend/src/components/SiteFooter.tsx",
           "operation": "modify",
-          "description": "Update footer styling to match the same theme accents and typography scale as the header/sections, keeping its structure and smooth-scroll quick links intact."
+          "description": "Update the footer logo image src to use the same new static empowerment horizontal logo asset as the header (via the shared brand assets module)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Update SEO/metadata to reference the new generated logo/social image assets (structured data + OG/Twitter).",
+      "acceptanceCriteria": [
+        "frontend/src/components/SeoStructuredData.tsx uses the new logo image filename for the Organization \"logo\" field.",
+        "frontend/index.html og:image and twitter:image reference the new generated social logo image filename.",
+        "After build, the referenced assets exist under frontend/public/assets/generated and load successfully in the browser."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/SeoStructuredData.tsx",
+          "operation": "modify",
+          "description": "Update Organization structured data logo reference to the new empowerment logo image filename (preferably via the shared brand assets module)."
         },
         {
-          "path": "frontend/tailwind.config.js",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "If needed to support the cohesive theme, extend Tailwind tokens (e.g., additional shadows/animations/typography scale) in a centralized way consistent with existing configuration, avoiding scattered one-off inline styles."
+          "description": "Update og:image and twitter:image to reference the new generated social logo image at frontend/public/assets/generated/ocean-empowerer-solutions-logo-empowerment.dim_512x256.png."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Ensure new logo assets live under frontend/public/assets/generated and are referenced directly as static assets only.",
+      "acceptanceCriteria": [
+        "All new/updated logo images are present under frontend/public/assets/generated.",
+        "No frontend code attempts to fetch logo images from the backend canister."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/.gitkeep",
+          "operation": "create",
+          "description": "Ensure the generated assets directory is tracked even in clean checkouts/build environments (if not already), keeping all logo assets served as static files only."
+        },
+        {
+          "path": "frontend/src/lib/brandAssets.ts",
+          "operation": "modify",
+          "description": "Ensure all exported brand asset paths are direct static paths under /assets/generated (no backend/canister fetching), covering the horizontal logo, icon, and social image filenames."
         }
       ]
     }
