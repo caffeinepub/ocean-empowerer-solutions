@@ -2,9 +2,14 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-an-updated-ocean-themed-brand-logo-concept-that-visually-communicates-empowerment-confident-market-entry-leadership-we-own-the-market-upward-growth-to-the-top-level-and-being-on-the-consumer-s-side-while-keeping-the-current-premium-clean-style",
-      "featureTitle": "Create an updated ocean-themed brand logo concept that visually communicates empowerment, confident market entry/leadership (\"we own the market\"), upward growth to the top level, and being on the consumer’s side, while keeping the current premium/clean style.",
-      "files": [],
+      "featureId": "feature-apply-a-cohesive-professional-visual-theme-across-the-site-colors-typography-spacing-shadows-borders-while-keeping-all-existing-sections-and-content-structure-intact-the-theme-should-feel-modern-and-corporate-with-restrained-use-of-accent-colors-and-improved-contrast-readability",
+      "featureTitle": "Apply a cohesive, professional visual theme across the site (colors, typography, spacing, shadows, borders) while keeping all existing sections and content structure intact. The theme should feel modern and corporate, with restrained use of accent colors and improved contrast/readability.",
+      "files": [
+        "frontend/index.css",
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/ProjectsSection.tsx",
+        "frontend/src/components/sections/TestimonialsSection.tsx"
+      ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -13,17 +18,49 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-4"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-site-to-use-the-new-logo-assets-consistently-in-the-header-and-footer-by-changing-the-image-src-paths-currently-pointing-to-assets-generated-premium-logo-horizontal-dim-512x128-png-to-the-newly-generated-empowerment-logo-asset",
-      "featureTitle": "Update the site to use the new logo assets consistently in the header and footer by changing the image src paths currently pointing to /assets/generated/premium-logo-horizontal.dim_512x128.png to the newly generated empowerment logo asset.",
+      "featureId": "feature-update-global-theme-tokens-and-base-styles-to-match-the-new-professional-theme-by-refining-css-variables-and-shared-utility-classes-e-g-in-the-global-stylesheet-and-tailwind-theme-without-changing-the-app-s-routing-or-adding-new-features",
+      "featureTitle": "Update global theme tokens and base styles to match the new professional theme by refining CSS variables and shared utility classes (e.g., in the global stylesheet and Tailwind theme), without changing the app’s routing or adding new features.",
       "files": [
+        "frontend/index.css",
+        "frontend/src/components/SectionHeader.tsx",
+        "frontend/src/components/sections/AboutSection.tsx",
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/components/sections/ServicesSection.tsx",
+        "frontend/src/components/sections/TestimonialsSection.tsx",
+        "frontend/src/components/sections/WhyChooseUsSection.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-polish-key-ui-components-for-a-more-premium-professional-presentation-header-navigation-primary-secondary-outline-buttons-cards-used-in-services-projects-why-choose-us-about-leadership-and-contact-information-panels-ensure-consistent-hover-focus-states-and-visual-rhythm",
+      "featureTitle": "Polish key UI components for a more premium, professional presentation: header/navigation, primary/secondary/outline buttons, cards used in Services/Projects/Why Choose Us/About/Leadership, and Contact information panels; ensure consistent hover/focus states and visual rhythm.",
+      "files": [
+        "frontend/src/components/ContactForm.tsx",
+        "frontend/src/components/MobileNav.tsx",
         "frontend/src/components/SiteFooter.tsx",
         "frontend/src/components/SiteHeader.tsx",
-        "frontend/src/lib/brandAssets.ts"
+        "frontend/src/components/sections/AboutSection.tsx",
+        "frontend/src/components/sections/ContactSection.tsx",
+        "frontend/src/components/sections/HomeSection.tsx",
+        "frontend/src/components/sections/ProjectsSection.tsx",
+        "frontend/src/components/sections/ServicesSection.tsx",
+        "frontend/src/components/sections/WhyChooseUsSection.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,44 +70,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-seo-logo-metadata-to-match-the-new-brand-logo-asset-s-update-organization-structured-data-logo-url-and-the-index-html-open-graph-twitter-image-url-to-use-the-new-generated-logo-social-image-asset",
-      "featureTitle": "Update SEO/logo metadata to match the new brand logo asset(s): update Organization structured data logo URL and the index.html Open Graph/Twitter image URL to use the new generated logo/social image asset.",
-      "files": [
-        "frontend/index.html",
-        "frontend/src/components/SeoStructuredData.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-all-newly-generated-logo-image-assets-are-placed-in-frontend-public-assets-generated-and-are-referenced-directly-as-static-assets-no-backend-involvement",
-      "featureTitle": "Ensure all newly generated logo image assets are placed in frontend/public/assets/generated and are referenced directly as static assets (no backend involvement).",
-      "files": [
-        "frontend/src/lib/brandAssets.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-7"
+        "REQ-3"
       ],
       "confidence": "high"
     }

@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Download, Heart } from 'lucide-react';
 import { siteContent } from '../content/siteContent';
 import { isValidEmail } from '../lib/isValidEmail';
 import { BRAND_ASSETS } from '../lib/brandAssets';
@@ -6,6 +6,14 @@ import { BRAND_ASSETS } from '../lib/brandAssets';
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
   const emailIsValid = isValidEmail(siteContent.contact.info.email);
+
+  // Safely get app identifier for UTM tracking
+  const getAppIdentifier = () => {
+    if (typeof window !== 'undefined') {
+      return encodeURIComponent(window.location.hostname || 'ocean-empowerer-solutions');
+    }
+    return 'ocean-empowerer-solutions';
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -18,7 +26,7 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="border-t border-border/60 bg-muted/20">
       <div className="container py-16 md:py-20 lg:py-24">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 mb-12">
           {/* Company Info */}
@@ -26,31 +34,41 @@ export function SiteFooter() {
             <div className="flex items-center gap-3">
               <img 
                 src={BRAND_ASSETS.logoHorizontal}
-                alt="OCEAN EMPOWERER SOLUTIONS" 
+                alt="Ocean Empowerer Solutions" 
                 className="h-10 w-auto max-w-full"
               />
             </div>
-            <h3 className="font-semibold text-lg break-words">
+            <h3 className="font-semibold text-lg break-words text-foreground">
               {siteContent.company.name}
             </h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {siteContent.company.description}
             </p>
+            <div className="pt-2">
+              <a
+                href={BRAND_ASSETS.logoHorizontalJpg}
+                download="ocean-empowerer-solutions-logo.jpg"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                <Download className="h-4 w-4" />
+                Download Logo (JPG)
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-5">
-            <h4 className="font-semibold text-base">Quick Links</h4>
+            <h4 className="font-semibold text-base text-foreground">Quick Links</h4>
             <nav className="flex flex-col gap-3">
-              {['Home', 'About', 'Services', 'Contact'].map((link) => (
+              {['Home', 'About Us', 'Services', 'Projects', 'Contact'].map((link) => (
                 <a
                   key={link}
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection(link.toLowerCase());
+                    scrollToSection(link.toLowerCase().replace(' ', '-'));
                   }}
-                  href={`#${link.toLowerCase()}`}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors w-fit"
+                  href={`#${link.toLowerCase().replace(' ', '-')}`}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 w-fit"
                 >
                   {link}
                 </a>
@@ -60,7 +78,7 @@ export function SiteFooter() {
 
           {/* Contact Info */}
           <div className="space-y-5">
-            <h4 className="font-semibold text-base">Contact Information</h4>
+            <h4 className="font-semibold text-base text-foreground">Contact Information</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
@@ -74,12 +92,12 @@ export function SiteFooter() {
                   {siteContent.contact.info.phone}
                 </span>
               </div>
-              <div className="flex items-center gap-3 text-sm">
-                <Mail className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+              <div className="flex items-start gap-3 text-sm">
+                <Mail className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
                 {emailIsValid ? (
                   <a 
                     href={`mailto:${siteContent.contact.info.email}`}
-                    className="text-muted-foreground hover:text-primary transition-colors break-all"
+                    className="text-muted-foreground hover:text-primary transition-colors duration-200 break-all"
                   >
                     {siteContent.contact.info.email}
                   </a>
@@ -93,14 +111,16 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>
-            © {currentYear}. Built with <span className="text-primary">♥</span> using{' '}
-            <a 
-              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-              target="_blank" 
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+          <p>© {currentYear} {siteContent.company.name}. All rights reserved.</p>
+          <p className="flex items-center gap-1.5">
+            Built with <Heart className="h-3.5 w-3.5 text-destructive fill-destructive" /> using{' '}
+            <a
+              href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${getAppIdentifier()}`}
+              target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors font-medium"
+              className="font-medium hover:text-primary transition-colors duration-200"
             >
               caffeine.ai
             </a>

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function useActiveSection() {
-  const [activeSection, setActiveSection] = useState<string>('home');
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const sections = ['home', 'about', 'services', 'contact'];
+    const sections = ['home', 'about', 'services', 'projects', 'why-choose-us', 'testimonials', 'contact'];
     
     const observer = new IntersectionObserver(
       (entries) => {

@@ -89,10 +89,62 @@ export class ExternalBlob {
         return this;
     }
 }
+export interface Message {
+    id: bigint;
+    subject: string;
+    name: string;
+    email: string;
+    message: string;
+}
 export interface backendInterface {
+    getAllMessages(): Promise<Array<Message>>;
+    getMessageCount(): Promise<bigint>;
+    submitMessage(name: string, email: string, subject: string, message: string): Promise<void>;
 }
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async getAllMessages(): Promise<Array<Message>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllMessages();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllMessages();
+            return result;
+        }
+    }
+    async getMessageCount(): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMessageCount();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMessageCount();
+            return result;
+        }
+    }
+    async submitMessage(arg0: string, arg1: string, arg2: string, arg3: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitMessage(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitMessage(arg0, arg1, arg2, arg3);
+            return result;
+        }
+    }
 }
 export interface CreateActorOptions {
     agent?: Agent;

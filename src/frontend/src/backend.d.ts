@@ -7,5 +7,15 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
+export interface Message {
+    id: bigint;
+    subject: string;
+    name: string;
+    email: string;
+    message: string;
+}
 export interface backendInterface {
+    getAllMessages(): Promise<Array<Message>>;
+    getMessageCount(): Promise<bigint>;
+    submitMessage(name: string, email: string, subject: string, message: string): Promise<void>;
 }

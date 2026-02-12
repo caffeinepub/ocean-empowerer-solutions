@@ -1,99 +1,77 @@
 {
   "kind": "build_request",
-  "title": "Revise ocean-themed logo to communicate empowerment, growth, and market leadership",
+  "title": "Professional theme upgrade (more polished visual design)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-4",
-      "text": "Create an updated ocean-themed brand logo concept that visually communicates empowerment, confident market entry/leadership (\"we own the market\"), upward growth to the top level, and being on the consumer’s side, while keeping the current premium/clean style.",
+      "id": "REQ-1",
+      "text": "Apply a cohesive, professional visual theme across the site (colors, typography, spacing, shadows, borders) while keeping all existing sections and content structure intact. The theme should feel modern and corporate, with restrained use of accent colors and improved contrast/readability.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
         ],
         "quotes": [
-          "stlye is good but we want Meaning of Empowerment in this ocean like this kind of loge its also identy of we are coming this market and we own the market like this kind of meaning logo we want we grow up up we complete with top level  and we always with consumer side"
+          "we want professional Version Theme updarde"
         ]
       },
       "acceptanceCriteria": [
-        "Updated logo visuals clearly incorporate an ocean identity (e.g., wave/sea forms) plus an unmistakable upward/leadership cue (e.g., rising crest, arrow, peak, lighthouse, etc.) without becoming overly complex.",
-        "Logo remains premium/clean and readable at small sizes (header height ~32–40px).",
-        "Color/contrast remains suitable on the site header/footer backgrounds (no loss of legibility)."
+        "The overall look and feel is consistently professional across header, all sections, and footer (no section appears to use a different style system).",
+        "Typography is consistent (heading hierarchy, body sizes, line-heights) and readability is improved compared to current theme.",
+        "Color usage is restrained and consistent (primary/secondary/accent are used intentionally; muted/foreground contrast meets accessibility expectations).",
+        "No content sections are removed or hidden as part of the theme upgrade."
       ]
     },
     {
-      "id": "REQ-5",
-      "text": "Update the site to use the new logo assets consistently in the header and footer by changing the image src paths currently pointing to /assets/generated/premium-logo-horizontal.dim_512x128.png to the newly generated empowerment logo asset.",
+      "id": "REQ-2",
+      "text": "Update global theme tokens and base styles to match the new professional theme by refining CSS variables and shared utility classes (e.g., in the global stylesheet and Tailwind theme), without changing the app’s routing or adding new features.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
+        ],
+        "quotes": [
+          "we want professional Version Theme updarde"
         ]
       },
       "acceptanceCriteria": [
-        "Header logo renders correctly and does not overflow the existing max-width constraints.",
-        "Footer logo renders correctly and matches the header logo (same asset/lockup).",
-        "No broken image links in header/footer on hard refresh."
+        "Global design tokens (background/foreground, primary/secondary/accent, border/ring, radii, shadows) are updated to reflect the new theme.",
+        "Common shared classes (e.g., navigation link styling, section spacing, section headings) reflect the new theme and reduce one-off styling drift.",
+        "The site renders correctly in both light and dark mode if dark mode is currently supported by tokens (no unreadable text on either mode)."
       ]
     },
     {
-      "id": "REQ-6",
-      "text": "Update SEO/logo metadata to match the new brand logo asset(s): update Organization structured data logo URL and the index.html Open Graph/Twitter image URL to use the new generated logo/social image asset.",
+      "id": "REQ-3",
+      "text": "Polish key UI components for a more premium, professional presentation: header/navigation, primary/secondary/outline buttons, cards used in Services/Projects/Why Choose Us/About/Leadership, and Contact information panels; ensure consistent hover/focus states and visual rhythm.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-6"
+        ],
+        "quotes": [
+          "we want professional Version Theme updarde"
         ]
       },
       "acceptanceCriteria": [
-        "frontend/src/components/SeoStructuredData.tsx uses the new logo image filename for the Organization \"logo\" field.",
-        "frontend/index.html og:image and twitter:image reference the new generated social logo image filename.",
-        "After build, the referenced assets exist under frontend/public/assets/generated and load successfully in the browser."
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Ensure all newly generated logo image assets are placed in frontend/public/assets/generated and are referenced directly as static assets (no backend involvement).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-6"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All new/updated logo images are present under frontend/public/assets/generated.",
-        "No frontend code attempts to fetch logo images from the backend canister."
+        "Header and navigation look more polished (spacing, alignment, hover/active states) and remain fully functional on desktop and mobile.",
+        "Buttons have consistent sizing, typography, hover, and focus styles across the app.",
+        "Cards and panels have consistent borders/radii/shadows and consistent internal spacing across all sections.",
+        "No regressions in responsiveness: layout remains clean on mobile, tablet, and desktop breakpoints."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything under frontend/src/components/ui.",
-    "Backend must remain a single-actor Motoko canister; do not add additional backend services."
+    "Do not modify files under frontend/src/components/ui (shadcn UI sources); compose and style via props/classes instead.",
+    "Do not edit immutable frontend hook files listed in SYSTEM_CONTEXT (e.g., useInternetIdentity/useActor/main.tsx).",
+    "Backend (Motoko) behavior and data structures must remain unchanged; this request is theme-only unless theme changes require no data migration."
   ],
   "nonGoals": [
-    "Adding new backend APIs or persistence.",
-    "Changing site sections/content beyond what is required to swap logo assets and SEO metadata.",
-    "Introducing third-party authentication providers (Internet Identity only)."
+    "Adding new sections or new business features beyond visual/theme changes.",
+    "Changing company copy/content strategy (other than minor typographic presentation improvements).",
+    "Implementing new authentication methods or third-party integrations."
   ],
   "imageRequirements": {
-    "required": [
-      "Ocean-themed premium logo social image, wide composition, clean vector-like shapes, transparent or solid background as appropriate (ocean-empowerer-solutions-logo-empowerment.dim_512x256.png)"
-    ],
-    "edits": [
-      "Empowerment-focused ocean identity with an upward growth/leadership cue; keep premium minimal geometry and deep navy + subtle metallic gold accent (premium-logo-horizontal.dim_512x128.png > premium-logo-horizontal-empowerment.dim_512x128.png)",
-      "Matching square icon variant with the same ocean empowerment mark; strong legibility at small sizes (premium-logo-icon.dim_256x256.png > premium-logo-icon-empowerment.dim_256x256.png)"
-    ]
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [
-      "Use English for any user-facing text in the build request."
-    ],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
+    "required": [],
+    "edits": []
   }
 }

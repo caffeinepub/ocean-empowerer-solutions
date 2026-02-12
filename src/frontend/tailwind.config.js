@@ -15,7 +15,7 @@ export default {
                 md: '2rem',
                 lg: '3rem',
                 xl: '4rem',
-                '2xl': '5rem',
+                '2xl': '6rem',
             },
             screens: {
                 '2xl': '1400px'
@@ -23,8 +23,28 @@ export default {
         },
         extend: {
             fontFamily: {
-                sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                display: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                sans: [
+                    'Inter',
+                    'system-ui',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'sans-serif'
+                ],
+                display: [
+                    'Inter',
+                    'system-ui',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'Helvetica Neue',
+                    'Arial',
+                    'sans-serif'
+                ],
             },
             colors: {
                 border: 'oklch(var(--border))',
@@ -72,16 +92,22 @@ export default {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
+                xl: 'calc(var(--radius) + 4px)',
+                '2xl': 'calc(var(--radius) + 8px)',
             },
             boxShadow: {
-                xs: '0 1px 2px 0 rgba(0,0,0,0.03)',
-                soft: '0 1px 3px 0 rgba(0,0,0,0.05), 0 1px 2px 0 rgba(0,0,0,0.03)',
-                medium: '0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04)',
-                large: '0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04)',
+                xs: '0 1px 2px 0 rgba(0,0,0,0.04)',
+                soft: '0 2px 8px 0 rgba(0,0,0,0.08), 0 1px 3px 0 rgba(0,0,0,0.06)',
+                medium: '0 8px 20px -2px rgba(0,0,0,0.10), 0 4px 8px -2px rgba(0,0,0,0.06)',
+                large: '0 20px 40px -4px rgba(0,0,0,0.12), 0 8px 16px -4px rgba(0,0,0,0.08)',
             },
             letterSpacing: {
                 tighter: '-0.02em',
-                tight: '-0.01em',
+                tight: '-0.015em',
+            },
+            lineHeight: {
+                relaxed: '1.7',
+                loose: '1.8',
             },
             keyframes: {
                 'accordion-down': {
@@ -95,12 +121,17 @@ export default {
                 'fade-in': {
                     from: { opacity: '0', transform: 'translateY(10px)' },
                     to: { opacity: '1', transform: 'translateY(0)' }
+                },
+                'slide-in': {
+                    from: { opacity: '0', transform: 'translateX(-10px)' },
+                    to: { opacity: '1', transform: 'translateX(0)' }
                 }
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
-                'fade-in': 'fade-in 0.5s ease-out'
+                'fade-in': 'fade-in 0.5s ease-out',
+                'slide-in': 'slide-in 0.4s ease-out'
             }
         }
     },

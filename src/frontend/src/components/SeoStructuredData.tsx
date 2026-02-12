@@ -23,6 +23,7 @@ export function SeoStructuredData() {
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": siteContent.contact.info.phone,
+      "email": siteContent.contact.info.email,
       "contactType": "customer service"
     }
   };

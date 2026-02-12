@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Refresh the ocean-themed brand logo to better communicate empowerment, upward growth, and confident market leadership while keeping a premium/clean look, and apply it consistently across the site and SEO metadata.
+**Goal:** Upgrade the site’s visual design to a cohesive, modern corporate/professional theme while keeping all existing sections and content structure unchanged.
 
 **Planned changes:**
-- Create updated ocean-themed logo assets (horizontal lockup and square icon) with a clear upward/leadership cue while remaining minimal and readable at small sizes.
-- Add the new generated logo assets to `frontend/public/assets/generated`.
-- Update header and footer to reference the new horizontal empowerment logo asset instead of the current `premium-logo-horizontal.dim_512x128.png`.
-- Update SEO/logo metadata to use the new logo/social image asset (Organization structured data logo, `og:image`, and `twitter:image`).
+- Refine global theme tokens and base styles (colors, typography, spacing, borders, radii, shadows) to improve consistency, contrast, and readability.
+- Standardize shared styling patterns (e.g., section spacing, headings, navigation link styles) to reduce one-off visual drift across sections.
+- Polish key UI components (header/navigation, buttons, cards/panels in Services/Projects/Why Choose Us/About/Leadership/Contact) with consistent hover/focus states and responsive behavior.
 
-**User-visible outcome:** The site shows the new empowerment-focused ocean logo in the header and footer, and shared links/metadata use the updated logo image without broken asset links.
+**User-visible outcome:** The site looks consistently more polished and corporate across all pages/sections, with improved readability and more consistent component styling (including in light/dark mode where supported), without any content or feature changes.

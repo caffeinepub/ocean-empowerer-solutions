@@ -1,98 +1,150 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Empowerment-focused ocean logo refresh and site-wide asset swap",
+  "title": "Professional corporate theme polish (tokens + component styling)",
   "requirements": [
     {
-      "id": "REQ-4",
-      "summary": "Add updated ocean-themed empowerment logo assets (horizontal, icon, and social image) as static generated assets.",
+      "id": "REQ-1",
+      "summary": "Apply a cohesive, modern corporate theme across the site while preserving all existing sections and content structure.",
       "acceptanceCriteria": [
-        "Updated logo visuals clearly incorporate an ocean identity (e.g., wave/sea forms) plus an unmistakable upward/leadership cue (e.g., rising crest, arrow, peak, lighthouse, etc.) without becoming overly complex.",
-        "Logo remains premium/clean and readable at small sizes (header height ~32–40px).",
-        "Color/contrast remains suitable on the site header/footer backgrounds (no loss of legibility)."
+        "The overall look and feel is consistently professional across header, all sections, and footer (no section appears to use a different style system).",
+        "Typography is consistent (heading hierarchy, body sizes, line-heights) and readability is improved compared to current theme.",
+        "Color usage is restrained and consistent (primary/secondary/accent are used intentionally; muted/foreground contrast meets accessibility expectations).",
+        "No content sections are removed or hidden as part of the theme upgrade."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/premium-logo-horizontal-empowerment.dim_512x128.png",
-          "operation": "create",
-          "description": "Add the newly generated empowerment-focused horizontal ocean brand logo asset (edited from the current premium horizontal logo) as a static file."
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Refine global base styling to a more corporate look: adjust typographic rhythm (line-heights, paragraph defaults), default focus visibility, and consistent surface/background treatment. Use shadcn-ui token approach (CSS variables consumed by Tailwind) to keep styling cohesive; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/public/assets/generated/premium-logo-icon-empowerment.dim_256x256.png",
-          "operation": "create",
-          "description": "Add the newly generated empowerment-focused square icon variant as a static file, ensuring strong legibility at small sizes."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the top-level layout applies consistent background and spacing conventions (e.g., main area surface/section separation) without changing routing or section composition; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/public/assets/generated/ocean-empowerer-solutions-logo-empowerment.dim_512x256.png",
-          "operation": "create",
-          "description": "Add the newly generated wide social logo image (ocean identity + empowerment/leadership cue) as a static file for OG/Twitter sharing previews."
+          "path": "frontend/src/components/sections/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Tune section background overlay/opacity and section spacing classes so the visual system matches other sections (more restrained, corporate contrast) while keeping content structure intact; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/TestimonialsSection.tsx",
+          "operation": "modify",
+          "description": "Align testimonial card styling and section background to the unified theme (consistent surfaces, borders, and text contrast) without altering content; verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-5",
-      "summary": "Swap header and footer logo image src to the newly generated empowerment horizontal logo asset, ensuring consistent lockup.",
+      "id": "REQ-2",
+      "summary": "Update global theme tokens and shared utility classes to reduce one-off styling drift, preserving existing routing and features.",
       "acceptanceCriteria": [
-        "Header logo renders correctly and does not overflow the existing max-width constraints.",
-        "Footer logo renders correctly and matches the header logo (same asset/lockup).",
-        "No broken image links in header/footer on hard refresh."
+        "Global design tokens (background/foreground, primary/secondary/accent, border/ring, radii, shadows) are updated to reflect the new theme.",
+        "Common shared classes (e.g., navigation link styling, section spacing, section headings) reflect the new theme and reduce one-off styling drift.",
+        "The site renders correctly in both light and dark mode if dark mode is currently supported by tokens (no unreadable text on either mode)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/lib/brandAssets.ts",
-          "operation": "create",
-          "description": "Create a single source of truth for brand asset static paths (e.g., header/footer logo and social image) to keep usage consistent and avoid accidental backend fetching."
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Update CSS variable tokens for a corporate palette (more neutral surfaces, restrained accent, improved contrast), refine radii/shadows, and enhance shared utility classes (e.g., nav-link, section-spacing, section-heading). Keep shadcn-ui source files untouched by relying on token-driven styling; verify the component's usage instructions before implementing."
         },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions to match updated tokens (e.g., shadows, radii, typography defaults) and ensure token usage stays consistent across light/dark modes; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SectionHeader.tsx",
+          "operation": "create",
+          "description": "Create a small shared SectionHeader component to standardize section title/subtitle spacing and typography (reducing drift) without changing content or adding new features. Use shadcn-ui/Tailwind conventions for consistent tokens; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Adopt the shared SectionHeader and shared theme utility classes to remove one-off typography/spacing differences while keeping the same content; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/AboutSection.tsx",
+          "operation": "modify",
+          "description": "Adopt the shared SectionHeader and shared theme utility classes for headings/spacing to align with the new global tokens; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/WhyChooseUsSection.tsx",
+          "operation": "modify",
+          "description": "Adopt the shared SectionHeader and shared theme utility classes to standardize layout rhythm and improve visual consistency; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Adopt the shared SectionHeader and shared theme utility classes to align contact section spacing and typographic hierarchy with the updated tokens; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/TestimonialsSection.tsx",
+          "operation": "modify",
+          "description": "Adopt the shared SectionHeader for consistent heading/subtitle styling and spacing across sections; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Polish header/navigation, buttons, cards, and contact panels with consistent hover/focus states and premium visual rhythm.",
+      "acceptanceCriteria": [
+        "Header and navigation look more polished (spacing, alignment, hover/active states) and remain fully functional on desktop and mobile.",
+        "Buttons have consistent sizing, typography, hover, and focus styles across the app.",
+        "Cards and panels have consistent borders/radii/shadows and consistent internal spacing across all sections.",
+        "No regressions in responsiveness: layout remains clean on mobile, tablet, and desktop breakpoints."
+      ],
+      "file_operations": [
         {
           "path": "frontend/src/components/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Update the header logo image src to use the new static empowerment horizontal logo asset (via the shared brand assets module). Preserve existing sizing/max-width behavior."
+          "description": "Refine header layout density (container spacing, logo/title alignment), update desktop nav link styling to match the new corporate theme, and ensure consistent hover/focus/active states using shared utilities (without changing behavior). Do not modify shadcn ui sources; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/MobileNav.tsx",
+          "operation": "modify",
+          "description": "Polish mobile navigation surfaces, active state, and tap targets for a premium look while keeping functionality unchanged; verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/components/SiteFooter.tsx",
           "operation": "modify",
-          "description": "Update the footer logo image src to use the same new static empowerment horizontal logo asset as the header (via the shared brand assets module)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Update SEO/metadata to reference the new generated logo/social image assets (structured data + OG/Twitter).",
-      "acceptanceCriteria": [
-        "frontend/src/components/SeoStructuredData.tsx uses the new logo image filename for the Organization \"logo\" field.",
-        "frontend/index.html og:image and twitter:image reference the new generated social logo image filename.",
-        "After build, the referenced assets exist under frontend/public/assets/generated and load successfully in the browser."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/SeoStructuredData.tsx",
-          "operation": "modify",
-          "description": "Update Organization structured data logo reference to the new empowerment logo image filename (preferably via the shared brand assets module)."
+          "description": "Align footer typography, link styling, and borders/shadows with the new theme tokens; ensure consistent spacing and readability across breakpoints; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/sections/HomeSection.tsx",
           "operation": "modify",
-          "description": "Update og:image and twitter:image to reference the new generated social logo image at frontend/public/assets/generated/ocean-empowerer-solutions-logo-empowerment.dim_512x256.png."
-        }
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "summary": "Ensure new logo assets live under frontend/public/assets/generated and are referenced directly as static assets only.",
-      "acceptanceCriteria": [
-        "All new/updated logo images are present under frontend/public/assets/generated.",
-        "No frontend code attempts to fetch logo images from the backend canister."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/.gitkeep",
-          "operation": "create",
-          "description": "Ensure the generated assets directory is tracked even in clean checkouts/build environments (if not already), keeping all logo assets served as static files only."
+          "description": "Normalize hero button variants and spacing so primary/secondary/outline styles look consistent and professional; keep the same calls-to-action and scroll behavior; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/lib/brandAssets.ts",
+          "path": "frontend/src/components/sections/ServicesSection.tsx",
           "operation": "modify",
-          "description": "Ensure all exported brand asset paths are direct static paths under /assets/generated (no backend/canister fetching), covering the horizontal logo, icon, and social image filenames."
+          "description": "Standardize service cards (border, radius, shadow, hover/focus) to match a premium corporate card style while keeping content unchanged; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Standardize project cards/panels (surface translucency, border/shadow, internal spacing) and ensure consistent hover behavior; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/AboutSection.tsx",
+          "operation": "modify",
+          "description": "Unify About/Leadership card styling (surface, border, shadow, spacing) with the global card system and ensure consistent hover/focus states; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/WhyChooseUsSection.tsx",
+          "operation": "modify",
+          "description": "Unify Why Choose Us feature cards with the same card/panel styling system (consistent radius/shadow/border and spacing); verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Polish the contact information panel and note panel styling (surface, border, icon containers) for a more corporate look; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ContactForm.tsx",
+          "operation": "modify",
+          "description": "Align form panel styling with the card/panel system and ensure consistent focus/invalid states and button sizing across variants (without changing validation/submission behavior); verify the component's usage instructions before implementing."
         }
       ]
     }

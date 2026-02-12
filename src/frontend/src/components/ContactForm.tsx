@@ -3,9 +3,10 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
-import { CheckCircle2, Send } from 'lucide-react';
+import { CheckCircle2, Send, AlertCircle } from 'lucide-react';
 import { siteContent } from '../content/siteContent';
 import { isValidEmail } from '../lib/isValidEmail';
+import { useSubmitMessage } from '../hooks/useQueries';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ export function ContactForm() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const submitMessageMutation = useSubmitMessage();
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -39,16 +42,30 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (validateForm()) {
-      setIsSubmitted(true);
-      // Reset form after 5 seconds
-      setTimeout(() => {
+      try {
+        await submitMessageMutation.mutateAsync({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: 'Contact Form Submission',
+          message: formData.message.trim(),
+        });
+        
+        setIsSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
-        setIsSubmitted(false);
-      }, 5000);
+        setErrors({});
+        
+        // Reset success state after 8 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 8000);
+      } catch (error) {
+        // Error is handled by mutation state
+        console.error('Failed to submit message:', error);
+      }
     }
   };
 
@@ -64,18 +81,18 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 text-center space-y-5 bg-card rounded-lg border border-border">
+      <div className="flex flex-col items-center justify-center p-12 text-center space-y-5 bg-card rounded-xl border border-border shadow-xs">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
           <CheckCircle2 className="h-8 w-8 text-primary" />
         </div>
-        <h3 className="text-2xl font-semibold">Message Sent!</h3>
+        <h3 className="text-2xl font-semibold text-foreground">Message Received!</h3>
         <p className="text-muted-foreground text-base max-w-sm leading-relaxed">
           {siteContent.contact.form.successMessage}
         </p>
         <Button
           variant="outline"
           onClick={() => setIsSubmitted(false)}
-          className="mt-4"
+          className="mt-4 shadow-xs hover:shadow-soft transition-all"
           size="lg"
         >
           Send Another Message
@@ -85,13 +102,29 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg border border-border">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-xl border border-border shadow-xs">
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold">Send us a Message</h3>
+        <h3 className="text-xl font-semibold text-foreground">Send us a Message</h3>
       </div>
       
+      {submitMessageMutation.isError && (
+        <div className="flex items-start gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/20">
+          <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
+          <div className="flex-1 text-sm text-destructive">
+            Failed to send message. Please try again or email us directly at{' '}
+            {emailIsValid ? (
+              <a href={`mailto:${siteContent.contact.info.email}`} className="underline font-medium">
+                {siteContent.contact.info.email}
+              </a>
+            ) : (
+              <span className="font-medium">{siteContent.contact.info.email}</span>
+            )}
+          </div>
+        </div>
+      )}
+      
       <div className="space-y-2">
-        <Label htmlFor="name" className="text-sm font-medium">
+        <Label htmlFor="name" className="text-sm font-medium text-foreground">
           Name
         </Label>
         <Input
@@ -101,6 +134,7 @@ export function ContactForm() {
           onChange={(e) => handleChange('name', e.target.value)}
           className={`h-11 ${errors.name ? 'border-destructive' : ''}`}
           placeholder="Your name"
+          disabled={submitMessageMutation.isPending}
         />
         {errors.name && (
           <p className="text-xs text-destructive">{errors.name}</p>
@@ -108,7 +142,7 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-sm font-medium">
+        <Label htmlFor="email" className="text-sm font-medium text-foreground">
           Email
         </Label>
         <Input
@@ -118,6 +152,7 @@ export function ContactForm() {
           onChange={(e) => handleChange('email', e.target.value)}
           className={`h-11 ${errors.email ? 'border-destructive' : ''}`}
           placeholder="your.email@example.com"
+          disabled={submitMessageMutation.isPending}
         />
         {errors.email && (
           <p className="text-xs text-destructive">{errors.email}</p>
@@ -125,7 +160,7 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message" className="text-sm font-medium">
+        <Label htmlFor="message" className="text-sm font-medium text-foreground">
           Message
         </Label>
         <Textarea
@@ -134,6 +169,7 @@ export function ContactForm() {
           onChange={(e) => handleChange('message', e.target.value)}
           className={`min-h-[120px] resize-none ${errors.message ? 'border-destructive' : ''}`}
           placeholder="Tell us about your project..."
+          disabled={submitMessageMutation.isPending}
         />
         {errors.message && (
           <p className="text-xs text-destructive">{errors.message}</p>
@@ -143,10 +179,20 @@ export function ContactForm() {
       <Button 
         type="submit" 
         size="lg"
-        className="w-full group h-11"
+        className="w-full group h-11 shadow-soft hover:shadow-medium transition-all"
+        disabled={submitMessageMutation.isPending}
       >
-        Send Message
-        <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        {submitMessageMutation.isPending ? (
+          <>
+            Sending...
+            <div className="ml-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          </>
+        ) : (
+          <>
+            Send Message
+            <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </>
+        )}
       </Button>
     </form>
   );
