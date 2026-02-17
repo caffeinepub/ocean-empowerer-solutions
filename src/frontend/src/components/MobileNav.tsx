@@ -1,6 +1,12 @@
+interface NavLink {
+  label: string;
+  id: string;
+  type: 'section' | 'route';
+}
+
 interface MobileNavProps {
   isOpen: boolean;
-  navLinks: Array<{ label: string; id: string }>;
+  navLinks: NavLink[];
   onNavigate: (id: string) => void;
   activeSection: string;
 }

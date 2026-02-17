@@ -1,26 +1,29 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
+import { ServiceType } from '../backend';
 
-interface SubmitMessageParams {
+interface SubmitInquiryParams {
   name: string;
   email: string;
-  subject: string;
+  phone: string;
+  service: ServiceType;
   message: string;
 }
 
-export function useSubmitMessage() {
+export function useSubmitInquiry() {
   const { actor } = useActor();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ name, email, subject, message }: SubmitMessageParams) => {
+    mutationFn: async ({ name, email, phone, service, message }: SubmitInquiryParams) => {
       if (!actor) {
         throw new Error('Backend actor not initialized');
       }
-      await actor.submitMessage(name, email, subject, message);
+      await actor.submitInquiry(name, email, phone, service, message);
     },
     onSuccess: () => {
-      // Invalidate any message-related queries if needed in the future
+      // Invalidate any inquiry-related queries if needed in the future
+      queryClient.invalidateQueries({ queryKey: ['inquiries'] });
       queryClient.invalidateQueries({ queryKey: ['messages'] });
     },
   });

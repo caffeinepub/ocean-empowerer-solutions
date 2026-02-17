@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { MobileNav } from './MobileNav';
@@ -27,11 +27,13 @@ export function SiteHeader() {
   };
 
   const navLinks = [
-    { label: 'Home', id: 'home' },
-    { label: 'About Us', id: 'about' },
-    { label: 'Services', id: 'services' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Contact', id: 'contact' },
+    { label: 'Home', id: 'home', type: 'section' as const },
+    { label: 'About', id: 'about', type: 'section' as const },
+    { label: 'Services', id: 'services', type: 'section' as const },
+    { label: 'Projects', id: 'projects', type: 'section' as const },
+    { label: 'Why Choose Us', id: 'why-choose-us', type: 'section' as const },
+    { label: 'Testimonials', id: 'testimonials', type: 'section' as const },
+    { label: 'Contact', id: 'contact', type: 'section' as const },
   ];
 
   return (
@@ -43,7 +45,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-3 min-w-0">
           <img 
             src={BRAND_ASSETS.logoHorizontal}
-            alt="Ocean Empowerer Solutions" 
+            alt={siteContent.company.name} 
             className="h-9 md:h-10 w-auto flex-shrink-0 max-w-[180px] sm:max-w-[220px] md:max-w-[260px]"
           />
           <span className="hidden sm:inline-block font-bold text-base md:text-lg truncate text-foreground">
@@ -89,7 +91,7 @@ export function SiteHeader() {
       <MobileNav 
         isOpen={mobileMenuOpen} 
         navLinks={navLinks}
-        onNavigate={scrollToSection}
+        onNavigate={(id) => scrollToSection(id)}
         activeSection={activeSection}
       />
     </header>

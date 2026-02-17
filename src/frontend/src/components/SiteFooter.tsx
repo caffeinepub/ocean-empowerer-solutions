@@ -10,9 +10,9 @@ export function SiteFooter() {
   // Safely get app identifier for UTM tracking
   const getAppIdentifier = () => {
     if (typeof window !== 'undefined') {
-      return encodeURIComponent(window.location.hostname || 'ocean-empowerer-solutions');
+      return encodeURIComponent(window.location.hostname || 'buildcraft-construction');
     }
-    return 'ocean-empowerer-solutions';
+    return 'buildcraft-construction';
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -35,7 +35,7 @@ export function SiteFooter() {
             <div className="flex items-center gap-3">
               <img 
                 src={BRAND_ASSETS.logoHorizontal}
-                alt="Ocean Empowerer Solutions" 
+                alt={siteContent.company.name} 
                 className="h-10 w-auto max-w-full"
               />
             </div>
@@ -48,11 +48,11 @@ export function SiteFooter() {
             <div className="pt-2">
               <a
                 href={BRAND_ASSETS.logoHorizontalJpg}
-                download="ocean-empowerer-solutions-logo.jpg"
+                download="buildcraft-construction-logo.png"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors duration-200"
               >
                 <Download className="h-4 w-4" />
-                Download Logo (JPG)
+                Download Logo
               </a>
             </div>
           </div>
@@ -61,17 +61,25 @@ export function SiteFooter() {
           <div className="space-y-5">
             <h4 className="font-bold text-base text-foreground">Quick Links</h4>
             <nav className="flex flex-col gap-3">
-              {['Home', 'About Us', 'Services', 'Projects', 'Contact'].map((link) => (
+              {[
+                { label: 'Home', id: 'home' },
+                { label: 'About', id: 'about' },
+                { label: 'Services', id: 'services' },
+                { label: 'Projects', id: 'projects' },
+                { label: 'Why Choose Us', id: 'why-choose-us' },
+                { label: 'Testimonials', id: 'testimonials' },
+                { label: 'Contact', id: 'contact' },
+              ].map((link) => (
                 <a
-                  key={link}
+                  key={link.id}
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection(link.toLowerCase().replace(' ', '-'));
+                    scrollToSection(link.id);
                   }}
-                  href={`#${link.toLowerCase().replace(' ', '-')}`}
+                  href={`#${link.id}`}
                   className="text-sm text-muted-foreground hover:text-accent transition-colors duration-200 w-fit"
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </nav>

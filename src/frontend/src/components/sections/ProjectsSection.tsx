@@ -1,19 +1,19 @@
 import { siteContent } from '../../content/siteContent';
-import { Waves, Fish, Ship, Droplets } from 'lucide-react';
+import { HardHat, Home, Building2, Wrench } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 
 export function ProjectsSection() {
   const getProjectIcon = (index: number) => {
-    const icons = [Waves, Fish, Ship, Droplets];
+    const icons = [HardHat, Home, Building2, Wrench];
     return icons[index % icons.length];
   };
 
   return (
     <section id="projects" className="section-spacing relative overflow-hidden">
-      {/* Light Blue Subtle Texture Background */}
-      <div className="absolute inset-0 z-0 opacity-[0.03]">
+      {/* Construction Subtle Texture Background */}
+      <div className="absolute inset-0 z-0 opacity-[0.04]">
         <img 
-          src="/assets/generated/light-blue-section-texture-worldclass.dim_2400x1200.png"
+          src="/assets/generated/construction-section-texture.dim_2400x1200.png"
           alt=""
           className="w-full h-full object-cover"
         />
@@ -42,7 +42,7 @@ export function ProjectsSection() {
                 </p>
                 <div className="space-y-3">
                   <div>
-                    <span className="text-sm font-semibold text-accent">Impact:</span>
+                    <span className="text-sm font-semibold text-accent">Timeline:</span>
                     <p className="text-sm text-muted-foreground mt-1">{project.impact}</p>
                   </div>
                 </div>

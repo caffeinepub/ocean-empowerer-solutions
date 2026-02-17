@@ -3,21 +3,25 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { CheckCircle2, Send, AlertCircle } from 'lucide-react';
 import { siteContent } from '../content/siteContent';
 import { isValidEmail } from '../lib/isValidEmail';
-import { useSubmitMessage } from '../hooks/useQueries';
+import { useSubmitInquiry } from '../hooks/useQueries';
+import { ServiceType } from '../backend';
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    service: '' as ServiceType | '',
     message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const submitMessageMutation = useSubmitMessage();
+  const submitInquiryMutation = useSubmitInquiry();
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -32,10 +36,20 @@ export function ContactForm() {
       newErrors.email = 'Please enter a valid email address';
     }
 
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+
+    if (!formData.service) {
+      newErrors.service = 'Please select a service type';
+    }
+
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = 'Project details are required';
+    } else if (formData.message.trim().length < 20) {
+      newErrors.message = 'Please provide at least 20 characters describing your project';
     }
 
     setErrors(newErrors);
@@ -47,24 +61,25 @@ export function ContactForm() {
     
     if (validateForm()) {
       try {
-        await submitMessageMutation.mutateAsync({
+        await submitInquiryMutation.mutateAsync({
           name: formData.name.trim(),
           email: formData.email.trim(),
-          subject: 'Contact Form Submission',
+          phone: formData.phone.trim(),
+          service: formData.service as ServiceType,
           message: formData.message.trim(),
         });
         
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', service: '', message: '' });
         setErrors({});
         
-        // Reset success state after 8 seconds
+        // Reset success state after 10 seconds
         setTimeout(() => {
           setIsSubmitted(false);
-        }, 8000);
+        }, 10000);
       } catch (error) {
         // Error is handled by mutation state
-        console.error('Failed to submit message:', error);
+        console.error('Failed to submit inquiry:', error);
       }
     }
   };
@@ -85,7 +100,7 @@ export function ContactForm() {
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
           <CheckCircle2 className="h-8 w-8 text-primary" />
         </div>
-        <h3 className="text-2xl font-bold text-foreground">Message Received!</h3>
+        <h3 className="text-2xl font-bold text-foreground">Inquiry Received!</h3>
         <p className="text-muted-foreground text-base max-w-sm leading-relaxed">
           {siteContent.contact.form.successMessage}
         </p>
@@ -95,7 +110,7 @@ export function ContactForm() {
           className="mt-4 shadow-xs hover:shadow-sm transition-all font-semibold"
           size="lg"
         >
-          Send Another Message
+          Submit Another Inquiry
         </Button>
       </div>
     );
@@ -104,14 +119,15 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg border border-border shadow-sm">
       <div className="space-y-2">
-        <h3 className="text-xl font-bold text-foreground">Send us a Message</h3>
+        <h3 className="text-xl font-bold text-foreground">Request a Free Estimate</h3>
+        <p className="text-sm text-muted-foreground">{siteContent.contact.form.note}</p>
       </div>
       
-      {submitMessageMutation.isError && (
+      {submitInquiryMutation.isError && (
         <div className="flex items-start gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/20">
           <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
           <div className="flex-1 text-sm text-destructive">
-            Failed to send message. Please try again or email us directly at{' '}
+            Failed to submit inquiry. Please try again or contact us directly at{' '}
             {emailIsValid ? (
               <a href={`mailto:${siteContent.contact.info.email}`} className="underline font-semibold">
                 {siteContent.contact.info.email}
@@ -125,7 +141,7 @@ export function ContactForm() {
       
       <div className="space-y-2">
         <Label htmlFor="name" className="text-sm font-semibold text-foreground">
-          Name
+          Name *
         </Label>
         <Input
           id="name"
@@ -133,8 +149,8 @@ export function ContactForm() {
           value={formData.name}
           onChange={(e) => handleChange('name', e.target.value)}
           className={`h-11 ${errors.name ? 'border-destructive' : ''}`}
-          placeholder="Your name"
-          disabled={submitMessageMutation.isPending}
+          placeholder={siteContent.contact.form.namePlaceholder}
+          disabled={submitInquiryMutation.isPending}
         />
         {errors.name && (
           <p className="text-xs text-destructive font-semibold">{errors.name}</p>
@@ -143,7 +159,7 @@ export function ContactForm() {
 
       <div className="space-y-2">
         <Label htmlFor="email" className="text-sm font-semibold text-foreground">
-          Email
+          Email *
         </Label>
         <Input
           id="email"
@@ -151,8 +167,8 @@ export function ContactForm() {
           value={formData.email}
           onChange={(e) => handleChange('email', e.target.value)}
           className={`h-11 ${errors.email ? 'border-destructive' : ''}`}
-          placeholder="your.email@example.com"
-          disabled={submitMessageMutation.isPending}
+          placeholder={siteContent.contact.form.emailPlaceholder}
+          disabled={submitInquiryMutation.isPending}
         />
         {errors.email && (
           <p className="text-xs text-destructive font-semibold">{errors.email}</p>
@@ -160,16 +176,59 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-2">
+        <Label htmlFor="phone" className="text-sm font-semibold text-foreground">
+          Phone *
+        </Label>
+        <Input
+          id="phone"
+          type="tel"
+          value={formData.phone}
+          onChange={(e) => handleChange('phone', e.target.value)}
+          className={`h-11 ${errors.phone ? 'border-destructive' : ''}`}
+          placeholder={siteContent.contact.form.phonePlaceholder}
+          disabled={submitInquiryMutation.isPending}
+        />
+        {errors.phone && (
+          <p className="text-xs text-destructive font-semibold">{errors.phone}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="service" className="text-sm font-semibold text-foreground">
+          Service Type *
+        </Label>
+        <Select
+          value={formData.service}
+          onValueChange={(value) => handleChange('service', value)}
+          disabled={submitInquiryMutation.isPending}
+        >
+          <SelectTrigger className={`h-11 ${errors.service ? 'border-destructive' : ''}`}>
+            <SelectValue placeholder={siteContent.contact.form.servicePlaceholder} />
+          </SelectTrigger>
+          <SelectContent>
+            {siteContent.contact.form.serviceTypes.map((serviceType) => (
+              <SelectItem key={serviceType.value} value={serviceType.value}>
+                {serviceType.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {errors.service && (
+          <p className="text-xs text-destructive font-semibold">{errors.service}</p>
+        )}
+      </div>
+
+      <div className="space-y-2">
         <Label htmlFor="message" className="text-sm font-semibold text-foreground">
-          Message
+          Project Details *
         </Label>
         <Textarea
           id="message"
           value={formData.message}
           onChange={(e) => handleChange('message', e.target.value)}
-          className={`min-h-[120px] resize-none ${errors.message ? 'border-destructive' : ''}`}
-          placeholder="Tell us about your project..."
-          disabled={submitMessageMutation.isPending}
+          className={`min-h-[140px] resize-none ${errors.message ? 'border-destructive' : ''}`}
+          placeholder={siteContent.contact.form.messagePlaceholder}
+          disabled={submitInquiryMutation.isPending}
         />
         {errors.message && (
           <p className="text-xs text-destructive font-semibold">{errors.message}</p>
@@ -180,16 +239,16 @@ export function ContactForm() {
         type="submit" 
         size="lg"
         className="w-full group h-11 shadow-sm hover:shadow-md transition-all font-semibold"
-        disabled={submitMessageMutation.isPending}
+        disabled={submitInquiryMutation.isPending}
       >
-        {submitMessageMutation.isPending ? (
+        {submitInquiryMutation.isPending ? (
           <>
-            Sending...
+            Submitting...
             <div className="ml-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
           </>
         ) : (
           <>
-            Send Message
+            {siteContent.contact.form.submitButton}
             <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </>
         )}

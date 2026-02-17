@@ -2,15 +2,21 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-new-typographic-logo-design-for-ocean-empowerer-solutions-that-uses-a-bold-unique-font-style-and-a-color-treatment-that-feels-young-forward-thinking-and-growth-oriented-while-remaining-highly-legible-at-small-sizes",
-      "featureTitle": "Create a new typographic logo design for “Ocean Empowerer Solutions” that uses a bold, unique font style and a color treatment that feels young, forward-thinking, and growth-oriented, while remaining highly legible at small sizes.",
-      "files": [],
+      "featureId": "feature-review-https-buildcraft-co-in-and-update-the-current-site-s-public-facing-pages-to-closely-match-the-reference-website-s-information-architecture-section-order-section-presence-navigation-labels-anchors-and-overall-layout-while-keeping-the-existing-single-page-section-scroll-structure-where-feasible",
+      "featureTitle": "Review https://buildcraft.co.in/ and update the current site’s public-facing pages to closely match the reference website’s information architecture (section order, section presence, navigation labels/anchors) and overall layout, while keeping the existing single-page section-scroll structure where feasible.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MobileNav.tsx",
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/src/components/SiteHeader.tsx"
+      ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
         "REQ-1"
@@ -18,40 +24,64 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-frontend-to-use-the-new-logo-assets-everywhere-the-brand-logo-appears-by-updating-frontend-src-lib-brandassets-ts-and-any-remaining-hardcoded-logo-references-e-g-social-meta-tags-in-frontend-index-html-to-point-to-the-new-generated-filenames",
-      "featureTitle": "Update the frontend to use the new logo assets everywhere the brand logo appears by updating frontend/src/lib/brandAssets.ts and any remaining hardcoded logo references (e.g., social meta tags in frontend/index.html) to point to the new generated filenames.",
+      "featureId": "feature-align-all-user-facing-marketing-content-company-name-hero-messaging-about-text-services-projects-testimonials-contact-copy-with-the-content-presented-on-https-buildcraft-co-in-and-ensure-all-user-facing-text-is-in-english",
+      "featureTitle": "Align all user-facing marketing content (company name, hero messaging, about text, services, projects, testimonials, contact copy) with the content presented on https://buildcraft.co.in/ and ensure all user-facing text is in English.",
       "files": [
-        "frontend/index.html",
-        "frontend/src/lib/brandAssets.ts"
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/src/components/SiteHeader.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-2"
+        "REQ-3"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-ensure-the-newly-generated-logo-image-files-are-included-as-static-assets-under-frontend-public-assets-generated-and-that-the-app-builds-and-renders-without-broken-image-links",
-      "featureTitle": "Ensure the newly generated logo image files are included as static assets under frontend/public/assets/generated and that the app builds and renders without broken image links.",
+      "featureId": "feature-ensure-the-site-uses-the-specified-construction-themed-static-image-assets-logos-and-section-imagery-from-frontend-public-assets-generated-and-that-all-existing-references-header-footer-hero-about-contact-seo-social-image-correctly-point-to-these-files",
+      "featureTitle": "Ensure the site uses the specified construction-themed static image assets (logos and section imagery) from frontend/public/assets/generated and that all existing references (header, footer, hero, about, contact, SEO/social image) correctly point to these files.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/BrandAssetPreloader.tsx"
+        "frontend/index.html",
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/src/components/SiteHeader.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-verify-and-update-seo-facing-metadata-to-align-with-https-buildcraft-co-in-branding-title-description-og-where-applicable-while-preserving-existing-search-console-verification-files-robots-txt-sitemap-xml-and-manifest-functionality",
+      "featureTitle": "Verify and update SEO-facing metadata to align with https://buildcraft.co.in/ branding (title/description/OG where applicable) while preserving existing search console verification files, robots.txt, sitemap.xml, and manifest functionality.",
+      "files": [
+        "frontend/index.html",
+        "frontend/public/site.webmanifest",
+        "frontend/src/components/SeoStructuredData.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
       ],
       "confidence": "high"
     }

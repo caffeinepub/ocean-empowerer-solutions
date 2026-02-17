@@ -1,103 +1,241 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update Ocean Empowerer Solutions logo assets and wire new branding across the frontend",
+  "title": "BuildCraft Construction public site alignment to buildcraft.co.in reference",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Generate a bold, youthful, forward-thinking typographic logo set (horizontal, icon, social) with high legibility at small sizes.",
+      "summary": "Restructure the single-page public site navigation and section order/anchors to closely match the buildcraft.co.in reference while keeping section-scroll UX.",
       "acceptanceCriteria": [
-        "New logo design direction is clearly typographic (font-led) and reads as bold/unique",
-        "Color treatment communicates a youthful and forward-thinking brand impression",
-        "Logo remains readable at header size (approx. 36–40px tall) and icon size (256x256)"
+        "Primary navigation links/labels and section anchors match the reference site’s structure as closely as possible within the current app architecture",
+        "All header and footer links scroll to the correct on-page sections without broken anchors",
+        "No placeholder/ocean-themed content remains visible anywhere on the public site"
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/bold-youthful-logo-horizontal.dim_512x128.png",
-          "operation": "create",
-          "description": "Add the newly generated horizontal typographic logo asset (512x128) that matches the bold/youthful/growth-oriented direction."
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Update header IA to match the reference: revise nav labels and anchor targets to the existing section IDs (home/about/services/projects/why-choose-us/testimonials/contact), remove public-facing Sign In from primary nav, and remove the non-reference CountriesBar strip. Use existing shadcn-ui Button for mobile toggle; verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/public/assets/generated/bold-youthful-logo-icon.dim_256x256.png",
-          "operation": "create",
-          "description": "Add the newly generated icon logo mark asset (256x256) designed for small-size legibility."
+          "path": "frontend/src/components/MobileNav.tsx",
+          "operation": "modify",
+          "description": "Ensure mobile navigation renders the updated header nav items and highlights the active section consistently, with all links scrolling to valid on-page anchors (no broken hash targets)."
         },
         {
-          "path": "frontend/public/assets/generated/bold-youthful-logo-social.dim_512x256.png",
-          "operation": "create",
-          "description": "Add the newly generated wide social-sharing logo lockup asset (512x256) suitable for OG/Twitter previews."
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Align footer quick links to the same section IDs used on the page (fix current About Us mapping to #about, add Why Choose Us and Testimonials if present in the reference IA), and ensure footer links scroll to the correct sections."
         },
         {
-          "path": "frontend/public/assets/generated/premium-logo-horizontal-lightblue.dim_512x128.png",
-          "operation": "rename",
-          "description": "Rename the previous horizontal logo asset to the new filename: rename to frontend/public/assets/generated/bold-youthful-logo-horizontal.dim_512x128.png (only if the old file currently exists and is being replaced)."
-        },
-        {
-          "path": "frontend/public/assets/generated/premium-logo-icon-lightblue.dim_256x256.png",
-          "operation": "rename",
-          "description": "Rename the previous icon logo asset to the new filename: rename to frontend/public/assets/generated/bold-youthful-logo-icon.dim_256x256.png (only if the old file currently exists and is being replaced)."
-        },
-        {
-          "path": "frontend/public/assets/generated/ocean-empowerer-solutions-logo-lightblue.dim_512x256.png",
-          "operation": "rename",
-          "description": "Rename the previous social logo asset to the new filename: rename to frontend/public/assets/generated/bold-youthful-logo-social.dim_512x256.png (only if the old file currently exists and is being replaced)."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Confirm the main single-page section composition and ordering matches the reference as closely as feasible (and includes sections present in the navigation) without introducing new top-level routes."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Update brand asset references to use the new generated logo filenames everywhere the logo appears (including SEO/social meta tags).",
+      "summary": "Update global Tailwind/stylesheet styling to a construction/industrial visual system consistent across sections, cards, and CTAs without editing immutable UI component sources.",
       "acceptanceCriteria": [
-        "frontend/src/lib/brandAssets.ts points to the new horizontal, icon, and social logo asset paths under /assets/generated/",
-        "The header and footer logo render the new horizontal logo via BRAND_ASSETS.logoHorizontal",
-        "OpenGraph/Twitter social image in frontend/index.html uses the new social logo asset filename (not the old one)",
-        "SEO structured data continues to use BRAND_ASSETS.logoSocial (no regression)"
+        "Site uses a coherent construction-themed visual system consistently across header, hero, section blocks, cards, and CTAs",
+        "All pages/sections remain readable with sufficient contrast and responsive behavior from mobile to desktop",
+        "No edits are made to any paths listed as immutable in SYSTEM_CONTEXT"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/lib/brandAssets.ts",
+          "path": "frontend/index.css",
           "operation": "modify",
-          "description": "Update BRAND_ASSETS.logoHorizontal, BRAND_ASSETS.logoIcon, BRAND_ASSETS.logoSocial (and corresponding *Jpg aliases) to point to /assets/generated/bold-youthful-logo-horizontal.dim_512x128.png, /assets/generated/bold-youthful-logo-icon.dim_256x256.png, and /assets/generated/bold-youthful-logo-social.dim_512x256.png."
+          "description": "Refine the construction/industrial theme tokens and shared utility classes (typography scale, spacing, card styling, button/CTA consistency via composition, and section background treatments) to visually align with the reference site while preserving responsive readability."
         },
         {
-          "path": "frontend/index.html",
+          "path": "frontend/tailwind.config.js",
           "operation": "modify",
-          "description": "Update og:image and twitter:image meta tags to reference /assets/generated/bold-youthful-logo-social.dim_512x256.png, replacing any previous social logo filename."
+          "description": "Adjust Tailwind theme extensions as needed to support the updated construction visual system (e.g., typography/font families, radii, shadows, and color usage via CSS variables) without modifying immutable shadcn/ui component sources. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/SiteHeader.tsx",
+          "path": "frontend/src/components/sections/HomeSection.tsx",
           "operation": "modify",
-          "description": "Verify the header logo renders via BRAND_ASSETS.logoHorizontal and that no hardcoded legacy logo paths remain; update only if any legacy paths are found."
-        },
-        {
-          "path": "frontend/src/components/SiteFooter.tsx",
-          "operation": "modify",
-          "description": "Verify the footer logo and logo download link use BRAND_ASSETS.* and that no hardcoded legacy logo paths remain; update only if any legacy paths are found."
-        },
-        {
-          "path": "frontend/src/components/SeoStructuredData.tsx",
-          "operation": "modify",
-          "description": "Verify structured data continues to source the organization logo from BRAND_ASSETS.logoSocial (no regression); update only if any hardcoded legacy paths are found."
+          "description": "Align hero layout composition (spacing, overlay readability, CTA grouping) to the reference while keeping existing section-scroll behavior and using existing shadcn-ui Button variants. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Ensure new logo assets are present under frontend/public/assets/generated and prevent broken logo links at runtime/build.",
+      "summary": "Replace all public marketing copy with BuildCraft content aligned to buildcraft.co.in and keep all displayed text in English using the centralized site content module.",
       "acceptanceCriteria": [
-        "All new logo files exist in frontend/public/assets/generated with the expected filenames",
-        "No missing-image placeholders or 404s occur for logo assets in header, footer, or social meta image"
+        "All displayed company/marketing content matches the reference site’s messaging (adapted into clear English where needed)",
+        "Content is stored/managed via the existing structured content source (site content module) rather than being hard-coded across many components",
+        "No truncated or cut-off strings appear in any section (hero, about, services, projects, testimonials, contact)"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/BrandAssetPreloader.tsx",
-          "operation": "create",
-          "description": "Create a small non-visual component that preloads BRAND_ASSETS.logoHorizontal/logoIcon/logoSocial on app mount and logs a warning if any fail to load, helping detect missing static assets early."
+          "path": "frontend/src/content/siteContent.ts",
+          "operation": "modify",
+          "description": "Update structured marketing content to match the reference (company name/tagline/description, hero text, about copy, services list, projects, why-choose-us items, testimonials, and contact copy) in English, and extend the schema to cover currently hard-coded UI strings (section headings, value cards, form headings, success/error copy) to avoid scattering text across components."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/components/sections/AboutSection.tsx",
           "operation": "modify",
-          "description": "Wire BrandAssetPreloader into the app composition so logo assets are preloaded during normal rendering without changing site layout/content."
+          "description": "Remove hard-coded About/values/team strings and render all About section user-facing text from siteContent to ensure consistency and easier updates."
+        },
+        {
+          "path": "frontend/src/components/sections/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Ensure services section titles/descriptions are entirely driven by siteContent and match the reference messaging (English), without truncation."
+        },
+        {
+          "path": "frontend/src/components/sections/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Ensure projects section titles/descriptions and any supporting labels are driven by siteContent and match the reference messaging (English)."
+        },
+        {
+          "path": "frontend/src/components/sections/WhyChooseUsSection.tsx",
+          "operation": "modify",
+          "description": "Ensure why-choose-us section heading/items are driven by siteContent and match the reference messaging (English)."
+        },
+        {
+          "path": "frontend/src/components/sections/TestimonialsSection.tsx",
+          "operation": "modify",
+          "description": "Ensure testimonials section heading/items are driven by siteContent and match the reference messaging (English) without clipped quotes/roles."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Ensure contact section headings and contact info labels/copy are driven by siteContent and match the reference (English)."
+        },
+        {
+          "path": "frontend/src/components/ContactForm.tsx",
+          "operation": "modify",
+          "description": "Move remaining hard-coded form UI strings (titles, inline validation messages, submit/loading labels, success headings, and error banners) into siteContent so all user-facing copy is centralized and consistent. Use existing shadcn-ui form controls (Input/Textarea/Select/Button); verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Update navigation labels to match the reference site’s wording and ensure the visible company name/text reflects updated siteContent."
+        },
+        {
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Update footer copy (company description, link labels, contact labels) to match the reference site messaging in English and pull from siteContent where applicable."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Wire the specified generated BuildCraft logos and construction imagery across header, footer, sections, and SEO/social so all images load from frontend/public/assets/generated.",
+      "acceptanceCriteria": [
+        "Header and footer render the horizontal logo; favicon/small usage renders the icon logo; social sharing metadata uses the social banner image",
+        "Hero/background and section images render without broken links and do not rely on video assets",
+        "All image references are served as static assets from frontend/public/assets/generated (not via backend endpoints)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/lib/brandAssets.ts",
+          "operation": "modify",
+          "description": "Confirm BRAND_ASSETS points to the required generated assets and is used as the single source of truth: frontend/public/assets/generated/buildcraft-logo-horizontal.dim_512x128.png, frontend/public/assets/generated/buildcraft-logo-icon.dim_256x256.png, frontend/public/assets/generated/buildcraft-logo-social.dim_512x256.png."
+        },
+        {
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Ensure the header logo uses BRAND_ASSETS.logoHorizontal and does not reference any legacy/ocean assets."
+        },
+        {
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Ensure the footer logo/download uses BRAND_ASSETS.logoHorizontal and does not reference any legacy/ocean assets."
+        },
+        {
+          "path": "frontend/src/components/sections/HomeSection.tsx",
+          "operation": "modify",
+          "description": "Ensure hero background image uses the required generated asset at frontend/public/assets/generated/construction-hero-bg.dim_2400x1350.jpg and loads reliably as a static asset."
+        },
+        {
+          "path": "frontend/src/components/sections/ProjectsSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the projects section texture uses frontend/public/assets/generated/construction-section-texture.dim_2400x1200.png and loads reliably as a static asset."
+        },
+        {
+          "path": "frontend/src/components/sections/AboutSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the About section image uses frontend/public/assets/generated/construction-about-team.dim_1600x900.jpg and loads reliably as a static asset."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the Contact section supporting image uses frontend/public/assets/generated/construction-contact-support.dim_1600x900.jpg and loads reliably as a static asset."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Update favicon/icon links and social image meta tags to use the required generated assets (icon: frontend/public/assets/generated/buildcraft-logo-icon.dim_256x256.png; social: frontend/public/assets/generated/buildcraft-logo-social.dim_512x256.png), removing any ocean/legacy asset references."
+        },
+        {
+          "path": "frontend/src/components/BrandAssetPreloader.tsx",
+          "operation": "modify",
+          "description": "Verify the preloader uses BRAND_ASSETS for the required logos and that any console logging remains non-blocking and does not reference legacy/ocean branding."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Update SEO metadata (title/description/OG/Twitter) to BuildCraft branding while preserving verification files, robots.txt, sitemap.xml, and manifest functionality.",
+      "acceptanceCriteria": [
+        "Page title and meta description reflect BuildCraft construction branding aligned to the reference site",
+        "OG/Twitter/social image points to the generated social banner asset",
+        "Existing verification files in frontend/public remain present and unchanged"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Replace ocean-themed title/description/author/keywords and OG/Twitter tags with BuildCraft construction branding aligned to the reference, and set OG/Twitter image to frontend/public/assets/generated/buildcraft-logo-social.dim_512x256.png while leaving Google verification meta tags intact."
+        },
+        {
+          "path": "frontend/public/site.webmanifest",
+          "operation": "modify",
+          "description": "Update manifest name/short_name/theme_color to BuildCraft construction branding, and update icons to use BuildCraft icon asset where feasible (frontend/public/assets/generated/buildcraft-logo-icon.dim_256x256.png) while preserving manifest functionality."
+        },
+        {
+          "path": "frontend/src/components/SeoStructuredData.tsx",
+          "operation": "modify",
+          "description": "Align JSON-LD structured data to BuildCraft branding and contact details from siteContent, and ensure the logo URL references BRAND_ASSETS.logoSocial."
+        },
+        {
+          "path": "frontend/src/hooks/useRuntimeSeo.ts",
+          "operation": "modify",
+          "description": "Verify runtime canonical/OG/Twitter URL updates remain compatible with updated BuildCraft metadata (no hard-coded legacy domain assumptions)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Keep the contact/inquiry form submission fully functional with validation and clear English success/error states, submitting all required fields to the backend actor.",
+      "acceptanceCriteria": [
+        "Submitting the contact form successfully persists an inquiry in the backend with all fields populated",
+        "Validation errors are shown inline for missing/invalid fields (name/email/phone/service/message)",
+        "On success, the confirmation state/message displays in English and the form resets"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ContactForm.tsx",
+          "operation": "modify",
+          "description": "Ensure the form still submits name/email/phone/service/message through the existing useSubmitInquiry mutation, shows inline validation errors for all required fields, and provides clear English success/error UI states. Use existing shadcn-ui Input/Textarea/Select/Button components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/content/siteContent.ts",
+          "operation": "modify",
+          "description": "Ensure contact form placeholders, service type labels, validation copy, success message, and any error/help text are present in English and aligned with the reference. Ensure serviceTypes values match the backend ServiceType enum strings."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Harden the inquiry submission mutation UX by ensuring frontend-visible errors are meaningful (e.g., actor unavailable vs. submit failure) while keeping the existing backend call path intact (via core-infrastructure useActor)."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the Contact section presents the form with reference-aligned headings and that the form remains accessible and usable across responsive breakpoints."
         }
       ]
     }

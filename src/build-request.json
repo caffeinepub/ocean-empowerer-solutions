@@ -1,88 +1,158 @@
 {
   "kind": "build_request",
-  "title": "Refresh brand logo to a bold, youthful, forward-thinking typographic style",
+  "title": "Update BuildCraft site to match https://buildcraft.co.in/ reference",
+  "projectName": "BuildCraft Construction",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Create a new typographic logo design for “Ocean Empowerer Solutions” that uses a bold, unique font style and a color treatment that feels young, forward-thinking, and growth-oriented, while remaining highly legible at small sizes.",
-      "target": "unknown",
+      "text": "Review https://buildcraft.co.in/ and update the current site’s public-facing pages to closely match the reference website’s information architecture (section order, section presence, navigation labels/anchors) and overall layout, while keeping the existing single-page section-scroll structure where feasible.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
+          "https://buildcraft.co.in/ PLEASE Refer this website and for updation"
         ]
       },
       "acceptanceCriteria": [
-        "New logo design direction is clearly typographic (font-led) and reads as bold/unique",
-        "Color treatment communicates a youthful and forward-thinking brand impression",
-        "Logo remains readable at header size (approx. 36–40px tall) and icon size (256x256)"
+        "Primary navigation links/labels and section anchors match the reference site’s structure as closely as possible within the current app architecture",
+        "All header and footer links scroll to the correct on-page sections without broken anchors",
+        "No placeholder/ocean-themed content remains visible anywhere on the public site"
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Update the frontend to use the new logo assets everywhere the brand logo appears by updating frontend/src/lib/brandAssets.ts and any remaining hardcoded logo references (e.g., social meta tags in frontend/index.html) to point to the new generated filenames.",
+      "text": "Update brand styling to visually align with https://buildcraft.co.in/ (construction/industrial feel), applying consistent typography, spacing, button styles, card styles, and section backgrounds across the site using Tailwind/global styles and section/component composition (do not edit immutable UI component sources).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
+          "PLEASE Refer this website and for updation"
         ]
       },
       "acceptanceCriteria": [
-        "frontend/src/lib/brandAssets.ts points to the new horizontal, icon, and social logo asset paths under /assets/generated/",
-        "The header and footer logo render the new horizontal logo via BRAND_ASSETS.logoHorizontal",
-        "OpenGraph/Twitter social image in frontend/index.html uses the new social logo asset filename (not the old one)",
-        "SEO structured data continues to use BRAND_ASSETS.logoSocial (no regression)"
+        "Site uses a coherent construction-themed visual system consistently across header, hero, section blocks, cards, and CTAs",
+        "All pages/sections remain readable with sufficient contrast and responsive behavior from mobile to desktop",
+        "No edits are made to any paths listed as immutable in SYSTEM_CONTEXT"
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Ensure the newly generated logo image files are included as static assets under frontend/public/assets/generated and that the app builds and renders without broken image links.",
+      "text": "Align all user-facing marketing content (company name, hero messaging, about text, services, projects, testimonials, contact copy) with the content presented on https://buildcraft.co.in/ and ensure all user-facing text is in English.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-6"
         ],
         "quotes": [
-          "We want logo design like think bold and unique font it aiming grow up that colour is indicated young and forward thinking"
+          "PLEASE Refer this website and for updation"
         ]
       },
       "acceptanceCriteria": [
-        "All new logo files exist in frontend/public/assets/generated with the expected filenames",
-        "No missing-image placeholders or 404s occur for logo assets in header, footer, or social meta image"
+        "All displayed company/marketing content matches the reference site’s messaging (adapted into clear English where needed)",
+        "Content is stored/managed via the existing structured content source (site content module) rather than being hard-coded across many components",
+        "No truncated or cut-off strings appear in any section (hero, about, services, projects, testimonials, contact)"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Ensure the site uses the specified construction-themed static image assets (logos and section imagery) from frontend/public/assets/generated and that all existing references (header, footer, hero, about, contact, SEO/social image) correctly point to these files.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "PLEASE Refer this website and for updation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header and footer render the horizontal logo; favicon/small usage renders the icon logo; social sharing metadata uses the social banner image",
+        "Hero/background and section images render without broken links and do not rely on video assets",
+        "All image references are served as static assets from frontend/public/assets/generated (not via backend endpoints)"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Verify and update SEO-facing metadata to align with https://buildcraft.co.in/ branding (title/description/OG where applicable) while preserving existing search console verification files, robots.txt, sitemap.xml, and manifest functionality.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "PLEASE Refer this website and for updation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page title and meta description reflect BuildCraft construction branding aligned to the reference site",
+        "OG/Twitter/social image points to the generated social banner asset",
+        "Existing verification files in frontend/public remain present and unchanged"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Keep the existing inquiry submission flow functional end-to-end: the Contact form must submit name, email, phone, selected service type, and message to the Motoko backend and show clear success/error states in English.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "PLEASE Refer this website and for updation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Submitting the contact form successfully persists an inquiry in the backend with all fields populated",
+        "Validation errors are shown inline for missing/invalid fields (name/email/phone/service/message)",
+        "On success, the confirmation state/message displays in English and the form resets"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Maintain admin-restricted inquiry management behavior: only admins can fetch all inquiries and inquiry count; public users/guests can submit inquiries without authentication.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "PLEASE Refer this website and for updation"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated/guest users can call submitInquiry successfully",
+        "Non-admin callers are rejected when calling getAllInquiries and getInquiryCount",
+        "Admin callers can retrieve stored inquiries and count without errors"
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only components).",
-    "Do not edit immutable hook files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
-    "Keep backend as a single Motoko actor; no backend changes are required for this logo update."
+    "Backend must remain a single Motoko actor with all logic in backend/main.mo",
+    "Do not edit frontend immutable paths listed in SYSTEM_CONTEXT (compose existing UI components instead)",
+    "Do not remove or modify existing Google Search Console verification HTML files in frontend/public",
+    "Do not introduce external databases, third-party auth providers, or unsupported backend/frontend frameworks"
   ],
   "nonGoals": [
-    "Do not redesign the full site layout or section content beyond updating logo asset references.",
-    "Do not change authentication or contact form/backend message storage behavior."
+    "Adding real-time chat, web sockets, push notifications, or email/SMS integrations",
+    "Integrating third-party authentication beyond Internet Identity",
+    "Introducing a new multi-canister/microservices backend architecture",
+    "Adding external CMS or external database storage"
   ],
   "imageRequirements": {
-    "required": [],
-    "edits": [
-      "Update to a bold, unique, youthful, forward-thinking typographic logo style with a growth-oriented color treatment (premium-logo-horizontal-lightblue.dim_512x128.png > bold-youthful-logo-horizontal.dim_512x128.png)",
-      "Update to a matching bold, unique icon-style logo mark suitable for small sizes (premium-logo-icon-lightblue.dim_256x256.png > bold-youthful-logo-icon.dim_256x256.png)",
-      "Update to a matching bold, unique wide logo lockup suitable for social sharing previews (ocean-empowerer-solutions-logo-lightblue.dim_512x256.png > bold-youthful-logo-social.dim_512x256.png)"
-    ]
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
+    "required": [
+      "Construction company horizontal logo, bold industrial style (buildcraft-logo-horizontal.dim_512x128.png)",
+      "Construction company square icon logo, simplified mark (buildcraft-logo-icon.dim_256x256.png)",
+      "Construction company social sharing banner with logo and subtle texture (buildcraft-logo-social.dim_512x256.png)",
+      "Construction hero background photo/illustration of modern building site with warm light and subtle overlay-friendly composition (construction-hero-bg.dim_2400x1350.jpg)",
+      "Subtle construction texture background (concrete/blueprint/steel pattern), low-contrast (construction-section-texture.dim_2400x1200.png)",
+      "About section image showing professional construction team on-site (construction-about-team.dim_1600x900.jpg)",
+      "Contact section image showing tools/blueprints/architecture desk scene (construction-contact-support.dim_1600x900.jpg)"
+    ],
+    "edits": []
   }
 }

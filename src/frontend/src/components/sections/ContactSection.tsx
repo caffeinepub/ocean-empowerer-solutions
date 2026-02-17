@@ -16,7 +16,7 @@ export function ContactSection() {
           {/* Contact Information with Professional Imagery */}
           <div className="space-y-8">
             <div className="card-professional p-8 space-y-6">
-              <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
               <div className="flex items-start gap-4">
                 <div className="icon-container w-12 h-12 bg-accent/10 text-accent flex-shrink-0">
@@ -55,10 +55,10 @@ export function ContactSection() {
             </div>
 
             {/* Professional Supporting Image */}
-            <div className="relative rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative rounded-lg overflow-hidden shadow-lg">
               <img 
-                src="/assets/generated/light-blue-corporate-sustainability-1.dim_1600x900.jpg"
-                alt="Sustainable technology and innovation"
+                src="/assets/generated/construction-contact-support.dim_1600x900.jpg"
+                alt="Professional construction consultation"
                 className="w-full h-auto object-cover"
               />
             </div>

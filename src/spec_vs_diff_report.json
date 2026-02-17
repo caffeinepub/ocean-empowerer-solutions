@@ -1,58 +1,54 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-12T15:33:39.150Z",
-  "summary": "Frontend references were updated to point to the new logo filenames (brandAssets.ts and social meta tags in index.html). However, the diff does not show the new generated logo image files being added under frontend/public/assets/generated, nor does it include evidence of the actual logo designs being created. The diff also includes additional, unrequested UI/content/styling changes and a new preloader component.",
+  "generatedAt": "2026-02-17T06:54:39.309Z",
+  "summary": "Diff implements a construction-themed single-page layout with updated header/footer navigation, SEO metadata, and backend inquiry/admin gating, but it also introduces unrequested backend user-profile features and does not provide clear diff evidence that the Contact form frontend was updated to match the new backend inquiry API and required validation/success behaviors.",
   "missing_requirements": [
     {
-      "id": "REQ-1",
-      "requirement": "Create new bold, youthful, forward-thinking typographic logo designs (horizontal, icon, social) that are legible at small sizes.",
-      "reason": "The diff only updates code references to new filenames; it does not include any evidence of the actual logo image design work being created/updated.",
+      "id": "REQ-6",
+      "requirement": "Keep the existing inquiry submission flow functional end-to-end: the Contact form must submit name, email, phone, selected service type, and message to the Motoko backend and show clear success/error states in English.",
+      "reason": "The backend submitInquiry signature now requires (name, email, phone, service, message), but the diff summary does not show any corresponding modifications to the frontend Contact form component and its backend mutation hook to send the new fields and implement inline validation + success/reset behavior; only backend/main.mo and navigation/SEO-related frontend files are shown as modified.",
       "evidence": [
-        "frontend/src/lib/brandAssets.ts (only path updates; no assets shown)",
-        "File diff summary shows no additions under frontend/public/assets/generated"
+        "backend/main.mo",
+        "frontend/src/App.tsx",
+        "frontend/src/components/SiteHeader.tsx",
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/index.html"
       ]
     },
     {
-      "id": "REQ-3",
-      "requirement": "Include the newly generated logo image files under frontend/public/assets/generated so the app builds without broken image links.",
-      "reason": "No files under frontend/public/assets/generated are shown as added/modified in the diff summary, so the presence of the required PNG files cannot be verified.",
+      "id": "REQ-4",
+      "requirement": "Use the specified construction-themed static image assets from frontend/public/assets/generated, including the construction-section-texture background image, and ensure all references point to these files.",
+      "reason": "While header/favicon/social images are clearly wired to generated assets, the diff summary does not provide direct evidence that the required section texture asset (construction-section-texture.dim_2400x1200.png) is actually referenced/used anywhere (only general styling/\"texture background helper\" is mentioned).",
       "evidence": [
-        "File diff summary (Added: 1, Modified: 5) does not list any frontend/public/assets/generated additions"
+        "frontend/src/components/SiteHeader.tsx",
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend/index.html"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added a runtime image preloader component that loads logo assets and logs success/failure to the console.",
-      "reason": "Not requested by the BuildRequest; requirements only asked to update asset references and include the static files.",
+      "description": "Backend user profile management APIs (getCallerUserProfile, getUserProfile, saveCallerUserProfile) with authorization checks.",
+      "reason": "BuildRequest only mentions inquiries submission and admin-restricted inquiry retrieval; no user profile storage or profile APIs were requested and this adds new backend functionality beyond scope.",
       "evidence": [
-        "frontend/src/components/BrandAssetPreloader.tsx",
-        "frontend/src/App.tsx (renders <BrandAssetPreloader />)"
-      ]
-    },
-    {
-      "description": "Introduced/changed additional brand asset constants for JPG variants (logoHorizontalJpg/logoIconJpg/logoSocialJpg) pointing to the same PNG paths.",
-      "reason": "Not requested; BuildRequest only specifies updating references to the new PNG filenames.",
-      "evidence": [
-        "frontend/src/lib/brandAssets.ts"
-      ]
-    },
-    {
-      "description": "Broader visual/content/styling changes across the frontend (global styles, Tailwind config, header/footer/sections content).",
-      "reason": "Explicit non-goal: do not redesign full site layout/section content beyond updating logo asset references. The diff summary indicates multiple unrelated UI/content modifications.",
-      "evidence": [
-        "frontend-file-summaries.txt (entries for frontend/index.css, frontend/tailwind.config.js, frontend/src/content/siteContent.ts, and multiple section/component files)"
+        "backend/main.mo"
       ]
     }
   ],
-  "confidence": 0.74,
+  "confidence": 0.66,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
     "frontend/index.html",
+    "frontend/public/site.webmanifest",
     "frontend/src/App.tsx",
-    "frontend/src/components/BrandAssetPreloader.tsx",
-    "frontend/src/lib/brandAssets.ts",
+    "frontend/src/components/CountriesBar.tsx",
+    "frontend/src/components/MobileNav.tsx",
+    "frontend/src/components/SeoStructuredData.tsx",
+    "frontend/src/components/SiteFooter.tsx",
+    "frontend/src/components/SiteHeader.tsx",
+    "frontend/src/lib/countries.ts",
     "project_state.json"
   ]
 }

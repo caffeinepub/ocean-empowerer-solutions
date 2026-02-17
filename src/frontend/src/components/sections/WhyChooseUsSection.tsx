@@ -1,38 +1,34 @@
-import { Target, TrendingUp, Settings, Compass } from 'lucide-react';
 import { siteContent } from '../../content/siteContent';
+import { Target, TrendingUp, Settings, DollarSign } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 
-const iconMap = {
-  target: Target,
-  chart: TrendingUp,
-  settings: Settings,
-  compass: Compass,
-};
-
 export function WhyChooseUsSection() {
+  const getFeatureIcon = (index: number) => {
+    const icons = [Target, TrendingUp, Settings, DollarSign];
+    return icons[index % icons.length];
+  };
+
   return (
-    <section id="why-choose-us" className="section-spacing">
+    <section id="why-choose-us" className="section-spacing bg-muted/30">
       <div className="container">
         <SectionHeader 
           title={siteContent.whyChooseUs.title}
           subtitle={siteContent.whyChooseUs.subtitle}
         />
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {siteContent.whyChooseUs.items.map((item, index) => {
-            const Icon = iconMap[item.icon as keyof typeof iconMap];
+            const Icon = getFeatureIcon(index);
             return (
               <div 
                 key={index}
-                className="text-center space-y-4 p-8 rounded-lg bg-card border border-border shadow-sm hover:shadow-md hover:border-accent/30 transition-all duration-300"
+                className="card-professional p-8 text-center hover:border-accent/30 transition-all group"
               >
-                <div className="flex items-center justify-center w-16 h-16 rounded-lg bg-primary/10 mx-auto">
-                  <Icon className="w-8 h-8 text-primary" />
+                <div className="icon-container w-16 h-16 mx-auto mb-6 bg-accent/10 text-accent group-hover:bg-accent/15 transition-colors">
+                  <Icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
               </div>

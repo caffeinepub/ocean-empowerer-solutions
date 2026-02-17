@@ -1,18 +1,13 @@
-import { Briefcase, Target, Settings, TrendingUp, Users, Compass } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { siteContent } from '../../content/siteContent';
+import { HardHat, Home, Wrench, Paintbrush, Grid3x3, Package } from 'lucide-react';
 import { SectionHeader } from '../SectionHeader';
 
-const iconMap = {
-  briefcase: Briefcase,
-  target: Target,
-  settings: Settings,
-  chart: TrendingUp,
-  users: Users,
-  compass: Compass,
-};
-
 export function ServicesSection() {
+  const getServiceIcon = (index: number) => {
+    const icons = [HardHat, Home, Wrench, Paintbrush, Grid3x3, Package];
+    return icons[index % icons.length];
+  };
+
   return (
     <section id="services" className="section-spacing">
       <div className="container">
@@ -21,26 +16,22 @@ export function ServicesSection() {
           subtitle={siteContent.services.subtitle}
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {siteContent.services.items.map((service, index) => {
-            const Icon = iconMap[service.icon as keyof typeof iconMap];
+            const Icon = getServiceIcon(index);
             return (
-              <Card 
+              <div 
                 key={index}
-                className="group hover:shadow-md hover:border-accent/30 transition-all duration-300 border-border shadow-sm"
+                className="card-professional p-8 hover:border-accent/30 transition-all group"
               >
-                <CardHeader className="space-y-4">
-                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/15 transition-colors">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm leading-relaxed">
-                    {service.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                <div className="icon-container w-16 h-16 mb-6 bg-accent/10 text-accent group-hover:bg-accent/15 transition-colors">
+                  <Icon className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
             );
           })}
         </div>
